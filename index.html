@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSY Fly | Laplace Dome — Autonomous Aerial Defense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,700;0,800;0,900;1,800&family=Inconsolata:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #07090d;
+  --surface:  #0b0e14;
+  --card:     #0e1219;
+  --card2:    #13181f;
+  --border:   rgba(255,255,255,0.07);
+  --border2:  rgba(255,255,255,0.12);
+  --accent:   #f5d84a;
+  --accent-dim: rgba(245,216,74,0.10);
+  --accent-mid: rgba(245,216,74,0.20);
+  --text:     #d8e0eb;
+  --muted:    #4e5a6a;
+  --label:    #7d8fa4;
+  --white:    #eef2f7;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--muted)}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(7,9,13,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Barlow',sans-serif;font-weight:800;font-size:19px;color:var(--white);text-decoration:none;letter-spacing:.06em;text-transform:uppercase}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-size:13px;font-weight:400;letter-spacing:.05em;color:var(--label);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:9px 22px;text-decoration:none;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 60px 88px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-bg svg{position:absolute;top:0;right:-5%;width:62%;height:100%;opacity:.10}
+.hero-badge{position:relative;display:inline-flex;align-items:center;gap:10px;font-family:'Inconsolata',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:32px}
+.hero-badge::before{content:'';width:44px;height:1px;background:var(--accent)}
+.blink{animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero-title{position:relative;font-family:'Barlow',sans-serif;font-weight:900;font-size:clamp(58px,8vw,116px);line-height:.92;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:36px;max-width:960px}
+.hero-title .yl{color:var(--accent)}
+.hero-title .dim{color:rgba(238,242,247,0.20)}
+.hero-desc{position:relative;font-size:17px;font-weight:300;color:var(--label);max-width:500px;margin-bottom:52px;line-height:1.8}
+.hero-actions{position:relative;display:flex;gap:20px;align-items:center}
+.btn-primary{font-family:'Barlow',sans-serif;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:14px 34px;text-decoration:none;transition:opacity .2s}
+.btn-primary:hover{opacity:.85}
+.btn-ghost{font-size:13px;font-weight:400;letter-spacing:.05em;color:var(--label);text-decoration:none;display:flex;align-items:center;gap:10px;transition:color .2s}
+.btn-ghost:hover{color:var(--accent)}
+.btn-ghost::after{content:'↓';font-size:17px}
+.hero-scroll{position:absolute;bottom:32px;right:60px;font-family:'Inconsolata',monospace;font-size:10px;letter-spacing:.22em;color:var(--muted);text-transform:uppercase;writing-mode:vertical-rl}
+
+/* ─── STATS ─── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface)}
+.stat{padding:40px 52px;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-n{font-family:'Barlow',sans-serif;font-weight:800;font-size:52px;color:var(--accent);line-height:1;margin-bottom:6px;letter-spacing:-.02em}
+.stat-l{font-family:'Inconsolata',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ─── SECTION CHROME ─── */
+.sec{padding:110px 60px}
+.sec-eyebrow{font-family:'Inconsolata',monospace;font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.sec-eyebrow::before{content:'';width:26px;height:1px;background:var(--accent)}
+.sec-title{font-family:'Barlow',sans-serif;font-weight:900;font-size:clamp(36px,4.2vw,60px);text-transform:uppercase;line-height:.95;letter-spacing:-.02em;margin-bottom:18px}
+.sec-title .yl{color:var(--accent)}
+.sec-desc{font-size:16px;font-weight:300;color:var(--label);max-width:560px;line-height:1.8}
+
+/* ─── DOME ─── */
+.dome-sec{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.dome-inner{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start}
+.dome-status{display:inline-flex;align-items:center;gap:8px;font-family:'Inconsolata',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--label);border:1px solid var(--border2);padding:5px 14px;margin-bottom:30px}
+.dome-status .dot{width:6px;height:6px;border-radius:50%;background:#f5a623}
+.dome-feats{margin-top:48px;display:flex;flex-direction:column;gap:0}
+.dome-feat{display:flex;flex-direction:column;gap:10px;padding:20px;border:1px solid var(--border);background:var(--card);transition:border-color .2s,background .2s;cursor:default}
+.dome-feat:hover{background:var(--card2);border-color:var(--border2)}
+.dome-feat-ico{font-family:'Inconsolata',monospace;font-size:14px;color:var(--accent);min-width:22px;margin-top:1px}
+.dome-feat-h{font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em}
+.dome-feat-p{font-size:13px;color:var(--label);line-height:1.65}
+.dome-diag{border:1px solid var(--border2);background:var(--card);padding:36px;position:relative;overflow:hidden}
+.dome-diag::before{content:'SYSTEM ARCHITECTURE';position:absolute;top:18px;left:22px;font-family:'Inconsolata',monospace;font-size:9px;letter-spacing:.2em;color:var(--muted)}
+.dome-svg-wrap{margin-top:24px;display:flex;justify-content:center}
+.dome-svg-wrap svg{max-width:320px;width:100%}
+
+/* ─── COMPONENTS ─── */
+.comp-sec{background:var(--bg)}
+.comp-grid{margin-top:56px;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.comp-card{background:var(--card);border:1px solid var(--border);padding:40px;position:relative;overflow:hidden;transition:border-color .25s,background .25s;cursor:default}
+.comp-card:hover{background:var(--card2);border-color:var(--border2)}
+.comp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background .25s}
+.comp-card:hover::before{background:var(--accent)}
+.comp-st{font-family:'Inconsolata',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.dot-active{width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.dot-dev{width:5px;height:5px;border-radius:50%;background:#f5a623}
+.dot-int{width:5px;height:5px;border-radius:50%;background:var(--muted)}
+.comp-name{font-family:'Barlow',sans-serif;font-weight:900;font-size:30px;text-transform:uppercase;letter-spacing:-.01em;color:var(--white);margin-bottom:4px;line-height:1}
+.comp-role{font-family:'Inconsolata',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+.comp-desc{font-size:14px;font-weight:300;color:var(--label);line-height:1.75;margin-bottom:22px}
+.comp-specs{display:flex;flex-direction:column;gap:6px}
+.comp-spec{font-size:13px;color:var(--muted);display:flex;gap:10px}
+.comp-spec::before{content:'—';color:var(--accent);flex-shrink:0}
+
+/* ─── APPROACH ─── */
+.approach-sec{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.approach-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:20px}
+.pipeline{margin-top:44px;display:flex;flex-direction:column;gap:0}
+.pipe-step{display:flex;gap:24px;padding:28px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.pipe-step:last-child{border-bottom:none}
+.pipe-n{font-family:'Barlow',sans-serif;font-weight:900;font-size:36px;color:rgba(245,216,74,.1);line-height:1;min-width:48px;letter-spacing:-.02em}
+.pipe-body{}
+.pipe-mod{font-family:'Inconsolata',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.pipe-title{font-size:15px;font-weight:700;color:var(--white);margin-bottom:6px;text-transform:uppercase;letter-spacing:.03em}
+.pipe-desc{font-size:13px;font-weight:300;color:var(--label);line-height:1.65}
+.pillars{display:flex;flex-direction:column;gap:12px;margin-top:44px}
+.pillar{background:var(--card);border:1px solid var(--border);padding:24px 28px;transition:border-color .2s,background .2s;cursor:default}
+.pillar:hover{background:var(--card2);border-color:var(--border2)}
+.pillar-title{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--white);margin-bottom:8px}
+.pillar-desc{font-size:13px;font-weight:300;color:var(--label);line-height:1.65}
+.pillar-desc .yl{color:var(--accent)}
+
+/* ─── CUSTOMERS ─── */
+.customers-sec{background:var(--bg)}
+.cust-grid{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cust-card{background:var(--card);border:1px solid var(--border);padding:36px;transition:border-color .2s,background .2s;cursor:default}
+.cust-card:hover{background:var(--card2);border-color:var(--border2)}
+.cust-ico{width:36px;height:36px;margin-bottom:20px;display:block;flex-shrink:0}
+.cust-name{font-family:'Barlow',sans-serif;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--white);margin-bottom:10px}
+.cust-desc{font-size:13px;font-weight:300;color:var(--label);line-height:1.7}
+
+/* ─── USE CASES ─── */
+.usecases-sec{background:var(--surface);border-top:1px solid var(--border)}
+.uc-grid{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.uc-card{background:var(--card);border:1px solid var(--border);padding:36px;cursor:default;transition:border-color .2s,background .2s}
+.uc-card:hover{background:var(--card2);border-color:var(--border2)}
+.uc-num{font-family:'Barlow',sans-serif;font-weight:900;font-size:60px;color:rgba(245,216,74,.06);line-height:1;margin-bottom:18px;letter-spacing:-.03em}
+.uc-title{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--white);margin-bottom:12px}
+.uc-scenario{font-size:13px;font-weight:300;color:var(--label);line-height:1.7;margin-bottom:12px}
+.uc-value{font-family:'Inconsolata',monospace;font-size:11px;letter-spacing:.05em;color:var(--accent);line-height:1.6;padding-top:14px;border-top:1px solid var(--border)}
+
+/* ─── FAQ ─── */
+.faq-sec{background:var(--bg);border-top:1px solid var(--border)}
+.faq-list{margin-top:56px;display:flex;flex-direction:column;gap:10px}
+.faq-item{background:var(--card);border:1px solid var(--border);overflow:hidden;transition:border-color .25s}
+.faq-item.open{border-color:rgba(245,216,74,0.25)}
+.faq-q{width:100%;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:20px;padding:24px 32px;text-align:left;color:var(--white)}
+.faq-q:hover .faq-q-text{color:var(--accent)}
+.faq-q-num{font-family:'Inconsolata',monospace;font-size:11px;letter-spacing:.12em;color:var(--accent);flex-shrink:0;width:28px}
+.faq-q-text{font-family:'Barlow',sans-serif;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--white);flex:1;transition:color .2s;line-height:1.35}
+.faq-icon{font-family:'Inconsolata',monospace;font-size:20px;color:var(--muted);flex-shrink:0;transition:transform .3s,color .2s;line-height:1}
+.faq-item.open .faq-icon{transform:rotate(45deg);color:var(--accent)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-body-inner{padding:0 32px 28px 80px;font-size:14px;font-weight:300;color:var(--label);line-height:1.85}
+.faq-body-inner strong{color:var(--white);font-weight:600}
+
+/* ─── CTA ─── */
+.cta-sec{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:100px 60px;text-align:center;position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 50%,rgba(245,216,74,.04) 0%,transparent 70%)}
+.cta-title{position:relative;font-family:'Barlow',sans-serif;font-weight:900;font-size:clamp(40px,5vw,68px);text-transform:uppercase;letter-spacing:-.02em;line-height:.95;margin-bottom:20px}
+.cta-title .yl{color:var(--accent)}
+.cta-sub{position:relative;font-size:16px;font-weight:300;color:var(--label);margin-bottom:48px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.8}
+.cta-actions{position:relative;display:flex;gap:20px;justify-content:center;align-items:center}
+
+/* ─── FOOTER ─── */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 60px;display:flex;justify-content:space-between;align-items:center}
+.foot-logo{font-family:'Barlow',sans-serif;font-weight:900;font-size:18px;text-transform:uppercase;letter-spacing:.06em;color:var(--white)}
+.foot-logo span{color:var(--accent)}
+.foot-links{display:flex;gap:28px;list-style:none}
+.foot-links a{font-size:12px;letter-spacing:.07em;color:var(--muted);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--accent)}
+.foot-copy{font-family:'Inconsolata',monospace;font-size:11px;letter-spacing:.1em;color:var(--muted)}
+
+/* ─── REVEAL — progressive enhancement ─── */
+.reveal{opacity:1;transform:none}
+.js-ready .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.js-ready .reveal.in{opacity:1;transform:none}
+.fade-in{animation:heroIn .8s ease forwards}
+.fade-in[style*="0.1"]{animation-delay:.1s;opacity:0}
+.fade-in[style*="0.22"]{animation-delay:.22s;opacity:0}
+.fade-in[style*="0.34"]{animation-delay:.34s;opacity:0}
+@keyframes heroIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px){
+  nav,footer{padding-left:32px;padding-right:32px}
+  .sec,.dome-sec .sec,.cta-sec{padding-left:32px;padding-right:32px}
+  .hero{padding-left:32px;padding-right:32px;padding-bottom:64px}
+  .stats .stat{padding:32px 28px}
+  .dome-inner,.approach-grid{grid-template-columns:1fr;gap:48px}
+  .comp-grid,.uc-grid,.cust-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .nav-links{display:none}
+  .stats{grid-template-columns:1fr 1fr}
+  .comp-grid,.uc-grid,.cust-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="#" class="nav-logo">OSY<span>FLY</span></a>
+  <ul class="nav-links">
+    <li><a href="#dome">Laplace Dome</a></li>
+    <li><a href="#components">Components</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#usecases">Use Cases</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Request Demo</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-bg">
+    <svg viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <circle cx="300" cy="400" r="290" stroke="#f5d84a" stroke-width="0.4"/>
+      <circle cx="300" cy="400" r="210" stroke="#f5d84a" stroke-width="0.4"/>
+      <circle cx="300" cy="400" r="130" stroke="#f5d84a" stroke-width="0.4"/>
+      <circle cx="300" cy="400" r="60"  stroke="#f5d84a" stroke-width="0.4"/>
+      <line x1="300" y1="110" x2="300" y2="690" stroke="#f5d84a" stroke-width="0.25"/>
+      <line x1="10"  y1="400" x2="590" y2="400" stroke="#f5d84a" stroke-width="0.25"/>
+      <line x1="95"  y1="195" x2="505" y2="605" stroke="#f5d84a" stroke-width="0.25"/>
+      <line x1="505" y1="195" x2="95"  y2="605" stroke="#f5d84a" stroke-width="0.25"/>
+      <line x1="300" y1="400" x2="300" y2="112" stroke="#f5d84a" stroke-width="1.2" stroke-linecap="round">
+        <animateTransform attributeName="transform" type="rotate" from="0 300 400" to="360 300 400" dur="7s" repeatCount="indefinite"/>
+      </line>
+      <!-- threat blip 1 -->
+      <circle cx="430" cy="255" r="5" fill="#f5d84a" opacity="0">
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.25;0.35" dur="7s" begin="1.9s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="430" cy="255" r="12" fill="none" stroke="#f5d84a" stroke-width="0.5" opacity="0">
+        <animate attributeName="opacity" values="0;0.7;0" keyTimes="0;0.1;0.4" dur="7s" begin="1.9s" repeatCount="indefinite"/>
+      </circle>
+      <!-- threat blip 2 red -->
+      <circle cx="175" cy="330" r="4" fill="#ff5c5c" opacity="0">
+        <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.05;0.25;0.35" dur="7s" begin="5.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="175" cy="330" r="10" fill="none" stroke="#ff5c5c" stroke-width="0.5" opacity="0">
+        <animate attributeName="opacity" values="0;0.7;0" keyTimes="0;0.1;0.4" dur="7s" begin="5.2s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+
+  <div class="hero-badge fade-in"><span class="blink">▮</span>&nbsp; Aerial Defense System Active</div>
+  <h1 class="hero-title fade-in" style="transition-delay:.1s">
+    Your<br>
+    Infrastructure<br>
+    Doesn't Wait.<br>
+    <span class="dim">Neither Does</span><br>
+    <span class="yl">Laplace Dome.</span>
+  </h1>
+  <p class="hero-desc fade-in" style="transition-delay:.22s">
+    When a drone enters restricted airspace, the window for response is measured in seconds.
+    OSY Fly's AI software detects, classifies, and autonomously neutralises aerial threats —
+    built on battle-proven technology, deployed for the infrastructure society depends on.
+  </p>
+  <div class="hero-actions fade-in" style="transition-delay:.34s">
+    <a href="#contact" class="btn-primary">Request a Demo</a>
+    <a href="#dome" class="btn-ghost">Explore the System</a>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<div class="stats reveal">
+  <div class="stat"><div class="stat-n">90%+</div><div class="stat-l">Verified Hit Rate Daylight</div></div>
+  <div class="stat"><div class="stat-n">30px</div><div class="stat-l">Min Object Recognition</div></div>
+  <div class="stat"><div class="stat-n">360°</div><div class="stat-l">Perimeter Coverage</div></div>
+  <div class="stat"><div class="stat-n">24/7</div><div class="stat-l">Autonomous Operation</div></div>
+</div>
+
+<!-- ═══ LAPLACE DOME ═══ -->
+<section class="sec dome-sec" id="dome">
+  <div class="dome-inner">
+    <div>
+      <div class="sec-eyebrow reveal" style="margin-bottom:20px">Flagship System &nbsp;—&nbsp; <span style="color:var(--white);font-family:'Barlow',sans-serif;font-weight:900;font-size:28px;text-transform:uppercase;letter-spacing:-.01em">Laplace <span class="yl">Dome</span></span></div>
+      <p class="sec-desc reveal">The complete autonomous airspace protection system. Laplace Dome integrates AI detection, multi-sensor fusion, and autonomous guidance into a single modular platform — a persistent, self-defending perimeter for the facilities that cannot afford to go dark.</p>
+      <div class="dome-feats reveal" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:40px">
+        <div class="dome-feat">
+          <div class="dome-feat-ico">◈</div>
+          <div>
+            <div class="dome-feat-h">360° Autonomous Coverage</div>
+            <div class="dome-feat-p">No blind spots, no gaps. Continuous airspace monitoring across all approach vectors, day and night, without operator attention required.</div>
+          </div>
+        </div>
+        <div class="dome-feat">
+          <div class="dome-feat-ico">◉</div>
+          <div>
+            <div class="dome-feat-h">Hardware-Agnostic Architecture</div>
+            <div class="dome-feat-p">Integrates with partner sensors, existing radar, and any capable UAV platform. No proprietary lock-in.</div>
+          </div>
+        </div>
+        <div class="dome-feat">
+          <div class="dome-feat-ico">◎</div>
+          <div>
+            <div class="dome-feat-h">Scalable Deployment</div>
+            <div class="dome-feat-p">From a single substation to a networked national perimeter. Same software stack, adapted configuration.</div>
+          </div>
+        </div>
+        <div class="dome-feat">
+          <div class="dome-feat-ico">⬡</div>
+          <div>
+            <div class="dome-feat-h">GPS-Denied & Edge-Native</div>
+            <div class="dome-feat-p">All computation runs locally. No cloud dependency. Fully resilient in contested electromagnetic environments.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="dome-diag">
+        <div class="dome-svg-wrap">
+          <svg viewBox="0 0 300 430" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- SENSORS row -->
+            <rect x="8" y="8" width="284" height="54" rx="2" fill="rgba(245,216,74,.03)" stroke="rgba(245,216,74,.1)" stroke-width="0.8"/>
+            <text x="150" y="26" text-anchor="middle" font-family="Inconsolata,monospace" font-size="8.5" fill="#4e5a6a" letter-spacing="2.5">SENSORS</text>
+            <text x="44"  y="50" text-anchor="middle" font-family="Inconsolata,monospace" font-size="10" fill="#7d8fa4">EO Cam</text>
+            <text x="110" y="50" text-anchor="middle" font-family="Inconsolata,monospace" font-size="10" fill="#7d8fa4">Radar</text>
+            <text x="178" y="50" text-anchor="middle" font-family="Inconsolata,monospace" font-size="10" fill="#7d8fa4">Acoustic</text>
+            <text x="247" y="50" text-anchor="middle" font-family="Inconsolata,monospace" font-size="10" fill="#7d8fa4">RF</text>
+            <!-- arrow -->
+            <line x1="150" y1="62" x2="150" y2="90" stroke="rgba(245,216,74,.18)" stroke-width="0.8" stroke-dasharray="4,3"/>
+            <polygon points="146,88 154,88 150,96" fill="rgba(245,216,74,.3)"/>
+            <!-- FusionFactory -->
+            <rect x="34" y="96" width="232" height="54" rx="2" fill="rgba(245,216,74,.06)" stroke="rgba(245,216,74,.22)" stroke-width="1"/>
+            <text x="150" y="117" text-anchor="middle" font-family="Inconsolata,monospace" font-size="8.5" fill="#f5d84a" letter-spacing="1.5">FUSIONFACTORY AI</text>
+            <text x="150" y="135" text-anchor="middle" font-family="Inconsolata,monospace" font-size="10" fill="#4e5a6a">Sync · Correlate · Fuse</text>
+            <line x1="150" y1="150" x2="150" y2="178" stroke="rgba(245,216,74,.18)" stroke-width="0.8" stroke-dasharray="4,3"/>
+            <polygon points="146,176 154,176 150,184" fill="rgba(245,216,74,.3)"/>
+            <!-- Riemann -->
+            <rect x="34" y="184" width="232" height="54" rx="2" fill="rgba(245,216,74,.06)" stroke="rgba(245,216,74,.22)" stroke-width="1"/>
+            <text x="150" y="205" text-anchor="middle" font-family="Inconsolata,monospace" font-size="8.5" fill="#f5d84a" letter-spacing="1.5">RIEMANN</text>
+            <text x="150" y="223" text-anchor="middle" font-family="Inconsolata,monospace" font-size="10" fill="#4e5a6a">Detect · Classify · Track</text>
+            <line x1="150" y1="238" x2="150" y2="266" stroke="rgba(245,216,74,.18)" stroke-width="0.8" stroke-dasharray="4,3"/>
+            <polygon points="146,264 154,264 150,272" fill="rgba(245,216,74,.3)"/>
+            <!-- Lagrange -->
+            <rect x="34" y="272" width="232" height="54" rx="2" fill="rgba(245,216,74,.06)" stroke="rgba(245,216,74,.22)" stroke-width="1"/>
+            <text x="150" y="293" text-anchor="middle" font-family="Inconsolata,monospace" font-size="8.5" fill="#f5d84a" letter-spacing="1.5">LAGRANGE</text>
+            <text x="150" y="311" text-anchor="middle" font-family="Inconsolata,monospace" font-size="10" fill="#4e5a6a">Plan · Command · Execute</text>
+            <line x1="150" y1="326" x2="150" y2="354" stroke="rgba(245,216,74,.18)" stroke-width="0.8" stroke-dasharray="4,3"/>
+            <polygon points="146,352 154,352 150,360" fill="rgba(245,216,74,.3)"/>
+            <!-- EFFECTORS row -->
+            <rect x="8" y="360" width="284" height="54" rx="2" fill="rgba(245,216,74,.03)" stroke="rgba(245,216,74,.1)" stroke-width="0.8"/>
+            <text x="150" y="378" text-anchor="middle" font-family="Inconsolata,monospace" font-size="8.5" fill="#4e5a6a" letter-spacing="2.5">EFFECTORS</text>
+            <text x="66"  y="402" text-anchor="middle" font-family="Inconsolata,monospace" font-size="10" fill="#7d8fa4">Interceptor</text>
+            <text x="165" y="402" text-anchor="middle" font-family="Inconsolata,monospace" font-size="10" fill="#7d8fa4">Jamming</text>
+            <text x="248" y="402" text-anchor="middle" font-family="Inconsolata,monospace" font-size="10" fill="#7d8fa4">Alert</text>
+            <!-- Ito side -->
+            <rect x="268" y="168" width="24" height="140" rx="1" fill="rgba(78,90,106,.07)" stroke="rgba(78,90,106,.18)" stroke-width="0.6"/>
+            <text x="280" y="247" text-anchor="middle" font-family="Inconsolata,monospace" font-size="8" fill="#4e5a6a" transform="rotate(-90 280 247)" letter-spacing="1.5">ITŌ</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMPONENTS ═══ -->
+<section class="sec comp-sec" id="components">
+  <div class="sec-eyebrow reveal">Software Components</div>
+  <h2 class="sec-title reveal">The <span class="yl">Intelligence</span><br>Stack</h2>
+  <p class="sec-desc reveal">Four modules. Each deployable independently or as an integrated system within Laplace Dome.</p>
+
+  <div class="comp-grid">
+    <div class="comp-card reveal">
+      <div class="comp-name">Riemann</div>
+      <div class="comp-role">AI Detection & Classification Engine</div>
+      <p class="comp-desc">Proprietary CNN optimised for NVIDIA Orin NX edge deployment. Processes live video to detect, classify, and track aerial threats at range — at the speed autonomous response demands.</p>
+      <div class="comp-specs">
+        <div class="comp-spec">90%+ hit rate in daylight conditions</div>
+        <div class="comp-spec">Object recognition from 30 pixels</div>
+        <div class="comp-spec">FPV, loitering munitions, recon UAVs, tactical platforms</div>
+        <div class="comp-spec">Two simultaneous streams, low-latency edge inference</div>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-name">Lagrange</div>
+      <div class="comp-role">Autonomous Flight & Decision Logic</div>
+      <p class="comp-desc">Translates sensor-derived threat data into executable flight and intercept missions. Handles guidance, sequencing, and terminal manoeuvring — no GPS dependency, no continuous operator input required.</p>
+      <div class="comp-specs">
+        <div class="comp-spec">Fully autonomous intercept execution</div>
+        <div class="comp-spec">Closed-loop integration with Riemann</div>
+        <div class="comp-spec">GPS-denied environment operation</div>
+        <div class="comp-spec">Compatible with multiple UAV platforms</div>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-name">FusionFactory AI</div>
+      <div class="comp-role">Multi-Sensor Intelligence & Data Fusion</div>
+      <p class="comp-desc">Aggregates EO, radar, acoustic, and RF data into a single real-time operational picture. Neural inference and trajectory modelling generate engagement-ready threat profiles for each tracked target.</p>
+      <div class="comp-specs">
+        <div class="comp-spec">Real-time cross-sensor fusion & validation</div>
+        <div class="comp-spec">Predictive trajectory and behaviour modelling</div>
+        <div class="comp-spec">Cross-modal correlation reduces false positives</div>
+        <div class="comp-spec">Precise coordinates, speed vectors, threat profiles</div>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-name">Itō</div>
+      <div class="comp-role">Simulation, Training & Validation</div>
+      <p class="comp-desc">Mission-specific simulation environment for developing and stress-testing AI models in high-fidelity virtual scenarios. SITL/HITL validated transfer pipeline ensures simulation performance translates to the field.</p>
+      <div class="comp-specs">
+        <div class="comp-spec">High-fidelity threat behaviour simulation</div>
+        <div class="comp-spec">Risk-free autonomy and multi-target testing</div>
+        <div class="comp-spec">SITL/HITL validated live transfer pipeline</div>
+        <div class="comp-spec">Rapid iteration against evolving threat profiles</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ APPROACH ═══ -->
+<section class="sec approach-sec" id="approach">
+  <div class="sec-eyebrow reveal">Our Approach</div>
+  <h2 class="sec-title reveal">Not a Camera.<br><span class="yl">A System.</span></h2>
+  <p class="sec-desc reveal">A camera sees a moving object. Our CNN identifies what it is. Our fusion engine knows where it's going. Our controller intercepts it. Four distinct technical capabilities. One integrated chain.</p>
+  <div class="pillars reveal" style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+    <div class="pillar">
+      <div class="pillar-title">Deep mathematics, not bolted-on AI</div>
+      <div class="pillar-desc">CNN architectures trained on real-world threat data. <span class="yl">Kalman-filter trajectory estimators.</span> Multi-sensor synchronisation algorithms. Closed-loop guidance logic from active operational experience.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">Edge-native, connectivity-independent</div>
+      <div class="pillar-desc">All critical computation runs locally. No cloud dependency, no round-trip latency. <span class="yl">Fully operational in GPS-denied environments.</span></div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">Validated in real conditions</div>
+      <div class="pillar-desc">Riemann and Lagrange tested against real-world aerial threats — not benchmarks. Itō enables continuous improvement as threat profiles evolve.</div>
+    </div>
+    <div class="pillar">
+      <div class="pillar-title">Operator always in command</div>
+      <div class="pillar-desc">Full autonomy with full human oversight. <span class="yl">Override capability at every stage.</span> The system acts; the operator controls.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CUSTOMERS ═══ -->
+<section class="sec customers-sec" id="customers">
+  <div class="sec-eyebrow reveal">Who We Protect</div>
+  <h2 class="sec-title reveal">Critical <span class="yl">Infrastructure.</span><br>At Every Scale.</h2>
+  <p class="sec-desc reveal">The same threats affect facilities of every type and size. Laplace Dome scales to match.</p>
+
+  <div class="cust-grid">
+    <div class="cust-card reveal">
+      <!-- Airport pixel icon -->
+      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="14" y="2" width="4" height="6" fill="#f5d84a"/>
+        <rect x="12" y="8" width="8" height="4" fill="#f5d84a"/>
+        <rect x="4" y="12" width="24" height="3" fill="#f5d84a"/>
+        <rect x="2" y="15" width="28" height="2" fill="#f5d84a"/>
+        <rect x="8" y="17" width="3" height="5" fill="#f5d84a"/>
+        <rect x="21" y="17" width="3" height="5" fill="#f5d84a"/>
+        <rect x="14" y="22" width="4" height="3" fill="#f5d84a"/>
+        <rect x="10" y="25" width="12" height="3" fill="#f5d84a"/>
+        <rect x="6" y="17" width="2" height="2" fill="#f5d84a"/>
+        <rect x="24" y="17" width="2" height="2" fill="#f5d84a"/>
+      </svg>
+      <div class="cust-name">Airports & Aviation</div>
+      <div class="cust-desc">Eliminate the drone incursion cost that grounds aircraft and costs airlines millions. From approach corridor monitoring to full airspace protection.</div>
+    </div>
+
+    <div class="cust-card reveal">
+      <!-- Energy / lightning bolt pixel icon -->
+      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="17" y="2" width="4" height="3" fill="#f5d84a"/>
+        <rect x="15" y="5" width="4" height="3" fill="#f5d84a"/>
+        <rect x="13" y="8" width="4" height="3" fill="#f5d84a"/>
+        <rect x="11" y="11" width="10" height="3" fill="#f5d84a"/>
+        <rect x="13" y="14" width="8" height="3" fill="#f5d84a"/>
+        <rect x="15" y="17" width="6" height="3" fill="#f5d84a"/>
+        <rect x="13" y="20" width="4" height="3" fill="#f5d84a"/>
+        <rect x="11" y="23" width="4" height="3" fill="#f5d84a"/>
+        <rect x="9" y="26" width="4" height="3" fill="#f5d84a"/>
+      </svg>
+      <div class="cust-name">Energy Infrastructure</div>
+      <div class="cust-desc">Power plants, substations, pipelines. Assets where a single strike has cascading national consequences. Protection that responds before the threat reaches the perimeter.</div>
+    </div>
+
+    <div class="cust-card reveal">
+      <!-- Water drop pixel icon -->
+      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="14" y="2" width="4" height="3" fill="#f5d84a"/>
+        <rect x="11" y="5" width="10" height="3" fill="#f5d84a"/>
+        <rect x="9"  y="8" width="14" height="3" fill="#f5d84a"/>
+        <rect x="7"  y="11" width="18" height="3" fill="#f5d84a"/>
+        <rect x="6"  y="14" width="20" height="3" fill="#f5d84a"/>
+        <rect x="6"  y="17" width="20" height="3" fill="#f5d84a"/>
+        <rect x="7"  y="20" width="18" height="3" fill="#f5d84a"/>
+        <rect x="9"  y="23" width="14" height="3" fill="#f5d84a"/>
+        <rect x="12" y="26" width="8"  height="3" fill="#f5d84a"/>
+      </svg>
+      <div class="cust-name">Water & Civil Utilities</div>
+      <div class="cust-desc">Reservoirs and treatment facilities. Detect pre-attack reconnaissance before damage is planned — behavioural classification identifies hostile intent early.</div>
+    </div>
+
+    <div class="cust-card reveal">
+      <!-- Port / anchor pixel icon -->
+      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="13" y="2"  width="6" height="3" fill="#f5d84a"/>
+        <rect x="11" y="5"  width="10" height="3" fill="#f5d84a"/>
+        <rect x="13" y="8"  width="6" height="3" fill="#f5d84a"/>
+        <rect x="14" y="11" width="4" height="14" fill="#f5d84a"/>
+        <rect x="5"  y="11" width="8" height="3" fill="#f5d84a"/>
+        <rect x="19" y="11" width="8" height="3" fill="#f5d84a"/>
+        <rect x="5"  y="23" width="5" height="3" fill="#f5d84a"/>
+        <rect x="22" y="23" width="5" height="3" fill="#f5d84a"/>
+        <rect x="5"  y="26" width="8" height="3" fill="#f5d84a"/>
+        <rect x="19" y="26" width="8" height="3" fill="#f5d84a"/>
+      </svg>
+      <div class="cust-name">Ports & Logistics Hubs</div>
+      <div class="cust-desc">Persistent aerial surveillance detection across multi-zone facilities. Distinguishes logistics drones from hostile actors. Works with existing port security infrastructure.</div>
+    </div>
+
+    <div class="cust-card reveal">
+      <!-- Stadium pixel icon -->
+      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2"  y="6"  width="4" height="20" fill="#f5d84a"/>
+        <rect x="26" y="6"  width="4" height="20" fill="#f5d84a"/>
+        <rect x="6"  y="6"  width="20" height="3" fill="#f5d84a"/>
+        <rect x="6"  y="23" width="20" height="3" fill="#f5d84a"/>
+        <rect x="6"  y="12" width="4"  height="2" fill="#f5d84a"/>
+        <rect x="13" y="12" width="6"  height="2" fill="#f5d84a"/>
+        <rect x="22" y="12" width="4"  height="2" fill="#f5d84a"/>
+        <rect x="6"  y="17" width="4"  height="2" fill="#f5d84a"/>
+        <rect x="13" y="17" width="6"  height="2" fill="#f5d84a"/>
+        <rect x="22" y="17" width="4"  height="2" fill="#f5d84a"/>
+        <rect x="2"  y="26" width="28" height="3" fill="#f5d84a"/>
+      </svg>
+      <div class="cust-name">Events & Public Gatherings</div>
+      <div class="cust-desc">Temporary deployable protection over stadiums and summits. Full autonomous response, no specialist operators required on-site.</div>
+    </div>
+
+    <div class="cust-card reveal">
+      <!-- Government building pixel icon -->
+      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="14" y="2"  width="4" height="4" fill="#f5d84a"/>
+        <rect x="4"  y="6"  width="24" height="3" fill="#f5d84a"/>
+        <rect x="2"  y="9"  width="28" height="2" fill="#f5d84a"/>
+        <rect x="4"  y="11" width="4" height="10" fill="#f5d84a"/>
+        <rect x="10" y="11" width="4" height="10" fill="#f5d84a"/>
+        <rect x="18" y="11" width="4" height="10" fill="#f5d84a"/>
+        <rect x="24" y="11" width="4" height="10" fill="#f5d84a"/>
+        <rect x="12" y="17" width="8" height="4"  fill="#f5d84a"/>
+        <rect x="2"  y="21" width="28" height="2" fill="#f5d84a"/>
+        <rect x="2"  y="25" width="28" height="3" fill="#f5d84a"/>
+      </svg>
+      <div class="cust-name">Government & Border Security</div>
+      <div class="cust-desc">From embassy compounds to national borders. Networked nodes create seamless defended lines. Continuous, autonomous, without fatigue or gaps.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ USE CASES ═══ -->
+<section class="sec usecases-sec" id="usecases">
+  <div class="sec-eyebrow reveal">Use Cases</div>
+  <h2 class="sec-title reveal">From Substations<br>to <span class="yl">State Borders.</span></h2>
+  <p class="sec-desc reveal">Nine real-world deployment scenarios. Same core technology — configuration adapts to the site.</p>
+
+  <div class="uc-grid">
+    <div class="uc-card reveal">
+      <div class="uc-num">01</div>
+      <div class="uc-title">Energy Infrastructure</div>
+      <div class="uc-scenario">A hostile drone approaches a transformer yard. Manual response is too slow — the window is seconds.</div>
+      <div class="uc-value">Riemann detects. FusionFactory triangulates. Lagrange dispatches the interceptor. Threat neutralised before perimeter breach.</div>
+    </div>
+    <div class="uc-card reveal">
+      <div class="uc-num">02</div>
+      <div class="uc-title">Civil Aviation — Airports</div>
+      <div class="uc-scenario">An unauthorised drone enters airport airspace. Current procedure: ground all aircraft, millions lost per incident.</div>
+      <div class="uc-value">Continuous monitoring across approach corridors. FusionFactory confirms. Lagrange neutralises. Aircraft operations continue.</div>
+    </div>
+    <div class="uc-card reveal">
+      <div class="uc-num">03</div>
+      <div class="uc-title">Water Treatment Facilities</div>
+      <div class="uc-scenario">A recon drone circles a water facility at night, mapping sensor locations before a follow-on attack.</div>
+      <div class="uc-value">FusionFactory builds a behaviour profile — loitering, mapping, not transiting. Pre-attack surveillance intercepted before data is transmitted.</div>
+    </div>
+    <div class="uc-card reveal">
+      <div class="uc-num">04</div>
+      <div class="uc-title">Stadiums & Major Events</div>
+      <div class="uc-scenario">A stadium final or national summit — high-value target, coordinated drone attack is catastrophic.</div>
+      <div class="uc-value">Temporary Laplace Dome deployment. Multiple Riemann feeds. FusionFactory manages simultaneous tracks. Lagrange sequences intercepts.</div>
+    </div>
+    <div class="uc-card reveal">
+      <div class="uc-num">05</div>
+      <div class="uc-title">Ports & Logistics Hubs</div>
+      <div class="uc-scenario">Drone surveillance of cargo positions represents significant economic and national security risk.</div>
+      <div class="uc-value">FusionFactory integrates radar with Riemann camera towers. Behavioural analysis distinguishes logistics from hostile recon.</div>
+    </div>
+    <div class="uc-card reveal">
+      <div class="uc-num">06</div>
+      <div class="uc-title">Border Perimeter Surveillance</div>
+      <div class="uc-scenario">A national border requires continuous coverage across hundreds of kilometres. Ground sensors miss aerial intrusions.</div>
+      <div class="uc-value">Networked Laplace Dome nodes with overlapping zones. Each node operates independently — together a seamless defended line.</div>
+    </div>
+    <div class="uc-card reveal">
+      <div class="uc-num">07</div>
+      <div class="uc-title">Government & Sensitive Facilities</div>
+      <div class="uc-scenario">Embassy compounds and government campuses face persistent drone threat. Existing security is entirely ground-focused.</div>
+      <div class="uc-value">Continuous airspace protection with minimal operator overhead. Immediate response. Full incident logging with replay.</div>
+    </div>
+    <div class="uc-card reveal">
+      <div class="uc-num">08</div>
+      <div class="uc-title">OEM Integration</div>
+      <div class="uc-scenario">A drone manufacturer wants autonomous detection and intercept capability. Building the AI stack in-house takes years.</div>
+      <div class="uc-value">Riemann and Lagrange licensed as software modules. Partner hardware gains autonomous capability in weeks, not years.</div>
+    </div>
+    <div class="uc-card reveal">
+      <div class="uc-num">09</div>
+      <div class="uc-title">Forward Operating Bases</div>
+      <div class="uc-scenario">A forward base in an active zone: GPS unreliable, connectivity intermittent, operators cannot be alert 24/7.</div>
+      <div class="uc-value">Riemann and Lagrange on edge hardware. No GPS dependency. No network access required. Continuous autonomous protection.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="sec faq-sec" id="faq">
+  <div class="sec-eyebrow reveal">Frequently Asked Questions</div>
+  <h2 class="sec-title reveal">Technical &<br><span class="yl">Procurement</span> Questions</h2>
+  <p class="sec-desc reveal">Detailed answers for infrastructure operators, security integrators, and procurement teams.</p>
+
+  <div class="faq-list reveal">
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">01</span>
+        <span class="faq-q-text">How does Laplace Dome differ from a standard drone detection system?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner">Most counter-drone systems stop at detection — they alert an operator that a drone is present, and a human decides what to do. <strong>Laplace Dome closes the entire loop autonomously.</strong> It detects the threat, classifies its type, models its trajectory, dispatches an interceptor, and executes terminal guidance without waiting for manual activation. In a fast-moving threat scenario, the difference between detection-only and autonomous response is the difference between watching the threat arrive and neutralising it before it reaches the perimeter. The operator retains full visibility and override capability throughout.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">02</span>
+        <span class="faq-q-text">What does "hardware-agnostic" mean in practice?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner"><strong>OSY Fly does not manufacture sensors or UAVs.</strong> Laplace Dome is a software intelligence layer that integrates with partner hardware — existing radar installations, third-party camera arrays, and any capable UAV interceptor platform. You are not locked into a proprietary sensor ecosystem, and you can integrate Laplace Dome with infrastructure security systems you already own. It also means we can adapt to new sensor types and effector platforms as the threat landscape evolves, without replacing the core software stack.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">03</span>
+        <span class="faq-q-text">Does the system require internet connectivity to operate?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner"><strong>No. All critical computation runs on local edge hardware.</strong> There is no cloud dependency in the detection, classification, fusion, or guidance pipeline. Infrastructure sites cannot assume communications will be intact during an attack, and any latency introduced by network round-trips is incompatible with the response times required. The system can receive software updates and transmit incident logs when connectivity is available, but these are non-critical functions that do not affect operational performance.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">04</span>
+        <span class="faq-q-text">What happens if GPS is jammed or spoofed?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner">Laplace Dome is designed specifically for <strong>GPS-denied and electronically contested environments.</strong> Lagrange does not rely on external positioning signals for terminal guidance. Navigation and intercept logic are derived from sensor data processed locally by Riemann and FusionFactory. This architecture emerged directly from operational experience in active conflict zones where GPS denial and spoofing are routine tactics. It is not an optional resilience feature — it is a core design requirement.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">05</span>
+        <span class="faq-q-text">How does the system handle multiple simultaneous threats?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner">FusionFactory AI maintains <strong>independent track objects for each detected target simultaneously</strong>, each with its own position, speed vector, classification confidence score, and predicted trajectory. Lagrange coordinates multi-intercept sequencing — prioritising threats by type, proximity, and vector — and dispatches available interceptor assets accordingly. A swarm attack scenario involving simultaneous multiple vectors is a design case, not an edge case.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">06</span>
+        <span class="faq-q-text">How accurate is the threat classification? What is the false positive rate?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner">Riemann achieves a <strong>verified hit rate exceeding 90% in daylight conditions</strong>, with object recognition down to 30 pixels. False positive management is a primary design concern for civil infrastructure deployment. FusionFactory's cross-sensor validation is the key mechanism: a threat is only escalated to the response layer when confirmed across multiple independent sensor modalities. Classification by Riemann provides a confidence score; FusionFactory provides cross-sensor corroboration. Both conditions must be met before autonomous response is triggered.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">07</span>
+        <span class="faq-q-text">Does a human operator need to be present for the system to function?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner">No. <strong>The system is designed for 24/7 autonomous operation with minimal human oversight.</strong> Detection, classification, fusion, and intercept execution all occur without requiring a human to be watching a screen. Operators typically configure rules of engagement during setup — specifying which threat classifications trigger automatic response and which require confirmation — and receive real-time alerts and post-event reports. The operator is always in command and can override at any point, but their presence is not required for the site to be protected.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">08</span>
+        <span class="faq-q-text">Can Riemann and Lagrange be deployed without the full Laplace Dome system?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner">Yes. <strong>Riemann and Lagrange are both commercially deployable as standalone modules</strong> and form OSY Fly's primary commercial software offering. They can be licensed and integrated onto third-party UAV platforms, embedded in existing counter-UAS systems, or deployed as the intelligence core of a partner's own product. Laplace Dome is the integrated reference architecture; Riemann and Lagrange are the modules that power it, available independently at license.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">09</span>
+        <span class="faq-q-text">What drone types can Riemann detect and classify?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner">Riemann is trained and validated against <strong>FPV drones, loitering munitions, reconnaissance UAVs, and tactical unmanned platforms.</strong> The classification model outputs a category and confidence score for each detected object. Training data comes from real operational scenarios — including active conflict environments — rather than simulation alone. The Itō environment enables continuous retraining as new drone types and tactics emerge.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">10</span>
+        <span class="faq-q-text">What sensors does Laplace Dome require?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner">Laplace Dome integrates with <strong>electro-optical cameras, radar, acoustic sensors, and RF monitoring systems.</strong> No specific vendor or model is required — the system's hardware-agnostic architecture accepts data from any capable sensor via standard interfaces. For a minimum viable deployment, an EO camera with Riemann provides detection and classification. Adding radar and acoustic inputs through FusionFactory progressively improves confidence, reduces false positives, and extends effective range.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">11</span>
+        <span class="faq-q-text">How is the system trained to handle new or unknown drone types?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner">The <strong>Itō simulation and training environment</strong> replicates the flight dynamics, sensor signatures, and behavioural patterns of known and novel drone types in a high-fidelity virtual environment. New models are trained in simulation, stress-tested against synthetic adversarial scenarios, and validated via SITL and HITL pipelines before deployment to live systems. This enables OSY Fly to update Riemann's classification capability as new threats emerge — without requiring live-fire testing for each iteration.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" aria-expanded="false">
+        <span class="faq-q-num">12</span>
+        <span class="faq-q-text">What is the deployment and integration timeline?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-body">
+        <div class="faq-body-inner"><strong>For Riemann or Lagrange integration onto an existing UAV platform</strong>, timelines are measured in weeks. For a full Laplace Dome deployment at a fixed site with sensor integration and rules-of-engagement configuration, typical timelines are discussed during the assessment phase. We engage with operators and integrators early in the procurement process to define the sensor complement, network topology, and operational parameters before any hardware is specified. Contact our team for a site-specific assessment.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ CTA ═══ -->
+<section class="cta-sec" id="contact">
+  <h2 class="cta-title reveal">Protect Your Airspace.<br><span class="yl">Talk to Our Team.</span></h2>
+  <p class="cta-sub reveal">Whether you are evaluating counter-UAS solutions, integrating autonomous AI into an existing platform, or planning a deployment — we would like to speak with you.</p>
+  <div class="cta-actions reveal">
+    <a href="/cdn-cgi/l/email-protection#9af9f5f4eefbf9eedaf5e9e3fcf6e3b4f9f5f7" class="btn-primary">Request a Demo</a>
+    <a href="/cdn-cgi/l/email-protection#65060a0b11040611250a161c03091c4b060a08" class="btn-ghost" style="color:var(--label)">Technical Enquiry</a>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="foot-logo">OSY<span>FLY</span></div>
+  <ul class="foot-links">
+    <li><a href="#dome">Laplace Dome</a></li>
+    <li><a href="#components">Components</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#usecases">Use Cases</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="foot-copy">© 2026 OSY Fly</div>
+</footer>
+
+<script>
+// ── js-ready enables reveal animations ──
+document.body.classList.add('js-ready');
+
+// ── Scroll reveal — with guaranteed fallback ──
+const revealAll = () => document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+
+// Try intersection observer first
+if ('IntersectionObserver' in window) {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  // Hard fallback: if nothing visible after 800ms, reveal everything
+  setTimeout(() => {
+    const hidden = document.querySelectorAll('.reveal:not(.in)');
+    if (hidden.length > document.querySelectorAll('.reveal').length * 0.5) revealAll();
+  }, 800);
+} else {
+  revealAll();
+}
+
+// ── FAQ accordion ──
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item  = btn.closest('.faq-item');
+    const body  = item.querySelector('.faq-body');
+    const inner = item.querySelector('.faq-body-inner');
+    const isOpen = item.classList.contains('open');
+
+    // close all
+    document.querySelectorAll('.faq-item.open').forEach(other => {
+      other.classList.remove('open');
+      other.querySelector('.faq-body').style.maxHeight = '0';
+      other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+
+    // open this one if it was closed
+    if (!isOpen
