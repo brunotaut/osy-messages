@@ -47,7 +47,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .hero-badge::before{content:'';width:44px;height:1px;background:var(--accent)}
 .blink{animation:blink 1.4s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-.hero-title{position:relative;font-family:'Barlow',sans-serif;font-weight:900;font-size:clamp(58px,8vw,116px);line-height:.92;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:36px;max-width:960px}
+.hero-title{position:relative;font-family:'Barlow',sans-serif;font-weight:900;font-size:clamp(45px,6.25vw,90px);line-height:.95;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:36px;max-width:960px}
 .hero-title .yl{color:var(--accent)}
 .hero-title .dim{color:rgba(238,242,247,0.20)}
 .hero-desc{position:relative;font-size:17px;font-weight:300;color:var(--label);max-width:500px;margin-bottom:52px;line-height:1.8}
@@ -573,55 +573,46 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 60px
       <div class="uc-num">01</div>
       <div class="uc-title">Energy Infrastructure</div>
       <div class="uc-scenario">A hostile drone approaches a transformer yard. Manual response is too slow — the window is seconds.</div>
-      <div class="uc-value">Riemann detects. FusionFactory triangulates. Lagrange dispatches the interceptor. Threat neutralised before perimeter breach.</div>
     </div>
     <div class="uc-card reveal">
       <div class="uc-num">02</div>
       <div class="uc-title">Civil Aviation — Airports</div>
       <div class="uc-scenario">An unauthorised drone enters airport airspace. Current procedure: ground all aircraft, millions lost per incident.</div>
-      <div class="uc-value">Continuous monitoring across approach corridors. FusionFactory confirms. Lagrange neutralises. Aircraft operations continue.</div>
     </div>
     <div class="uc-card reveal">
       <div class="uc-num">03</div>
       <div class="uc-title">Water Treatment Facilities</div>
       <div class="uc-scenario">A recon drone circles a water facility at night, mapping sensor locations before a follow-on attack.</div>
-      <div class="uc-value">FusionFactory builds a behaviour profile — loitering, mapping, not transiting. Pre-attack surveillance intercepted before data is transmitted.</div>
     </div>
     <div class="uc-card reveal">
       <div class="uc-num">04</div>
       <div class="uc-title">Stadiums & Major Events</div>
       <div class="uc-scenario">A stadium final or national summit — high-value target, coordinated drone attack is catastrophic.</div>
-      <div class="uc-value">Temporary Laplace Dome deployment. Multiple Riemann feeds. FusionFactory manages simultaneous tracks. Lagrange sequences intercepts.</div>
     </div>
     <div class="uc-card reveal">
       <div class="uc-num">05</div>
       <div class="uc-title">Ports & Logistics Hubs</div>
       <div class="uc-scenario">Drone surveillance of cargo positions represents significant economic and national security risk.</div>
-      <div class="uc-value">FusionFactory integrates radar with Riemann camera towers. Behavioural analysis distinguishes logistics from hostile recon.</div>
     </div>
     <div class="uc-card reveal">
       <div class="uc-num">06</div>
       <div class="uc-title">Border Perimeter Surveillance</div>
       <div class="uc-scenario">A national border requires continuous coverage across hundreds of kilometres. Ground sensors miss aerial intrusions.</div>
-      <div class="uc-value">Networked Laplace Dome nodes with overlapping zones. Each node operates independently — together a seamless defended line.</div>
     </div>
     <div class="uc-card reveal">
       <div class="uc-num">07</div>
       <div class="uc-title">Government & Sensitive Facilities</div>
       <div class="uc-scenario">Embassy compounds and government campuses face persistent drone threat. Existing security is entirely ground-focused.</div>
-      <div class="uc-value">Continuous airspace protection with minimal operator overhead. Immediate response. Full incident logging with replay.</div>
     </div>
     <div class="uc-card reveal">
       <div class="uc-num">08</div>
       <div class="uc-title">OEM Integration</div>
       <div class="uc-scenario">A drone manufacturer wants autonomous detection and intercept capability. Building the AI stack in-house takes years.</div>
-      <div class="uc-value">Riemann and Lagrange licensed as software modules. Partner hardware gains autonomous capability in weeks, not years.</div>
     </div>
     <div class="uc-card reveal">
       <div class="uc-num">09</div>
       <div class="uc-title">Forward Operating Bases</div>
       <div class="uc-scenario">A forward base in an active zone: GPS unreliable, connectivity intermittent, operators cannot be alert 24/7.</div>
-      <div class="uc-value">Riemann and Lagrange on edge hardware. No GPS dependency. No network access required. Continuous autonomous protection.</div>
     </div>
   </div>
 </section>
@@ -833,4 +824,13 @@ document.querySelectorAll('.faq-q').forEach(btn => {
     });
 
     // open this one if it was closed
-    if (!isOpen
+    if (!isOpen) {
+      item.classList.add('open');
+      body.style.maxHeight = inner.scrollHeight + 48 + 'px';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+</script>
+</body>
+</html>
