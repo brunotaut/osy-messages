@@ -126,24 +126,77 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .pillar-desc{font-size:13px;font-weight:300;color:var(--label);line-height:1.65}
 .pillar-desc .yl{color:var(--accent)}
 
-/* ─── CUSTOMERS ─── */
-.customers-sec{background:var(--bg)}
-.cust-grid{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.cust-card{background:var(--card);border:1px solid var(--border);padding:36px;transition:border-color .2s,background .2s;cursor:default}
-.cust-card:hover{background:var(--card2);border-color:var(--border2)}
-.cust-ico{width:36px;height:36px;margin-bottom:20px;display:block;flex-shrink:0}
-.cust-name{font-family:'Barlow',sans-serif;font-weight:800;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--white);margin-bottom:10px}
-.cust-desc{font-size:13px;font-weight:300;color:var(--label);line-height:1.7}
+/* ─── CUSTOMER SEGMENTS & SCENARIOS ─── */
+.seg-sec{background:var(--surface);border-top:1px solid var(--border)}
+.seg-grid{margin-top:56px;display:flex;flex-direction:column;gap:12px}
+.seg-card{background:var(--card);border:1px solid var(--border);padding:36px 48px;transition:border-color .2s}
+.seg-card:hover{border-color:var(--border2)}
+.seg-header{display:flex;align-items:center;gap:20px;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.seg-ico{width:28px;height:28px;flex-shrink:0}
+.seg-header-text{display:flex;align-items:baseline;gap:12px}
+.seg-num{font-family:'Inconsolata',monospace;font-size:11px;letter-spacing:.18em;color:var(--muted)}
+.seg-title{font-family:'Barlow',sans-serif;font-weight:800;font-size:16px;text-transform:uppercase;letter-spacing:.07em;color:var(--accent)}
+.seg-desc{font-size:14px;font-weight:300;color:var(--label);line-height:1.8;margin-bottom:24px;max-width:900px}
+.seg-scenarios{display:flex;flex-direction:column;gap:0}
+.seg-item{border-top:1px solid var(--border)}
+.seg-item:last-child{border-bottom:1px solid var(--border)}
+.seg-item.open{border-color:rgba(245,216,74,.2)}
+.seg-q{width:100%;background:none;border:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:14px 0;text-align:left;gap:20px;transition:color .2s;color:var(--white)}
+.seg-q:hover{color:var(--accent)}
+.seg-q-text{font-size:13px;font-weight:500;color:var(--white);line-height:1.5;flex:1;transition:color .2s}
+.seg-item:hover .seg-q-text{color:var(--accent)}
+.seg-icon{font-family:'Inconsolata',monospace;font-size:18px;color:var(--muted);flex-shrink:0;transition:transform .3s,color .2s;line-height:1}
+.seg-item.open .seg-icon{transform:rotate(45deg);color:var(--accent)}
+.seg-body{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.seg-body-inner{padding:0 0 16px 0;font-size:13px;font-weight:300;color:var(--label);line-height:1.75;max-width:760px}
 
-/* ─── USE CASES ─── */
-.usecases-sec{background:var(--surface);border-top:1px solid var(--border)}
-.uc-grid{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.uc-card{background:var(--card);border:1px solid var(--border);padding:36px;cursor:default;transition:border-color .2s,background .2s}
-.uc-card:hover{background:var(--card2);border-color:var(--border2)}
-.uc-num{font-family:'Barlow',sans-serif;font-weight:900;font-size:60px;color:rgba(245,216,74,.06);line-height:1;margin-bottom:18px;letter-spacing:-.03em}
-.uc-title{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--white);margin-bottom:12px}
-.uc-scenario{font-size:13px;font-weight:300;color:var(--label);line-height:1.7;margin-bottom:12px}
-.uc-value{font-family:'Inconsolata',monospace;font-size:11px;letter-spacing:.05em;color:var(--accent);line-height:1.6;padding-top:14px;border-top:1px solid var(--border)}
+/* ─── MARKET TABLE ─── */
+.mkt-sec{background:var(--bg);border-top:1px solid var(--border)}
+.mkt-table-wrap{margin-top:40px;overflow-x:auto;border:1px solid var(--border)}
+.mkt-table{width:100%;border-collapse:collapse;font-size:13px;min-width:900px}
+.mkt-table thead tr{background:var(--card)}
+.mkt-table th{font-family:'Inconsolata',monospace;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:12px 14px;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap;font-weight:400}
+.mkt-table th.mkt-seg-h{text-align:left;color:var(--label);width:200px}
+.mkt-table td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--border);color:var(--label);font-variant-numeric:tabular-nums}
+.mkt-table td.mkt-seg{text-align:left;font-family:'Barlow',sans-serif;font-size:12px;font-weight:500;color:var(--white);letter-spacing:.02em;white-space:nowrap}
+.mkt-table tr:hover td{background:var(--card2)}
+.mkt-table .mkt-hi{color:var(--accent);font-weight:600}
+.mkt-table .mkt-low{color:var(--muted)}
+.mkt-table .mkt-total td{background:var(--card);font-weight:700;color:var(--white);border-top:1px solid var(--border2);border-bottom:none}
+.mkt-table .mkt-total td.mkt-seg{color:var(--accent)}
+.mkt-legend{display:flex;gap:28px;margin-top:18px}
+.mkt-legend-item{display:flex;align-items:center;gap:8px;font-family:'Inconsolata',monospace;font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.mkt-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.mkt-dot-hi{background:var(--accent)}
+.mkt-dot-mid{background:var(--label)}
+.mkt-dot-low{background:var(--muted)}
+.mkt-sources{margin-top:24px;font-size:12px;font-weight:300;color:var(--muted);line-height:1.8;max-width:900px;padding-top:20px;border-top:1px solid var(--border)}
+
+/* ─── COMPANIES TABLE ─── */
+.co-legend{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px;font-size:12px;color:var(--label)}
+.co-leg-item{display:flex;align-items:center;gap:7px}
+.co-leg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+.co-nat{background:rgba(0,180,255,0.15);border:1px solid rgba(0,180,255,0.35)}
+.co-int{background:var(--card);border:1px solid var(--border2)}
+.co-itg{background:rgba(0,220,130,0.10);border:1px solid rgba(0,220,130,0.30)}
+.co-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.co-btn{font-family:'Barlow',sans-serif;font-size:11px;font-weight:500;letter-spacing:.06em;padding:6px 14px;border:1px solid var(--border2);background:transparent;color:var(--label);cursor:pointer;transition:all .2s;text-transform:uppercase}
+.co-btn:hover{border-color:var(--accent);color:var(--accent)}
+.co-btn.active{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.co-table-wrap{overflow-x:auto;border:1px solid var(--border)}
+.co-table{width:100%;border-collapse:collapse;font-size:11.5px;min-width:1000px}
+.co-table thead tr{background:var(--card)}
+.co-table th{font-family:'Inconsolata',monospace;font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;font-weight:400}
+.co-table th.co-country-h{width:110px;color:var(--label)}
+.co-table td{padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+.co-table td.co-country{font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;color:var(--white);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap;background:var(--card)}
+.co-table tr:hover td{background:var(--card2)}
+.co-tag{display:inline-block;margin:2px 2px 2px 0;padding:2px 8px;border-radius:2px;font-size:10.5px;line-height:1.5;white-space:nowrap;text-decoration:none;cursor:pointer;transition:opacity .15s,transform .15s}
+.co-tag:hover{opacity:.8;transform:translateY(-1px)}
+.co-tag.co-nat{background:rgba(0,180,255,0.12);border:0.5px solid rgba(0,180,255,0.3);color:#6dd4f5}
+.co-tag.co-int{background:var(--card2);border:0.5px solid var(--border2);color:var(--text)}
+.co-tag.co-itg{background:rgba(0,220,130,0.08);border:0.5px solid rgba(0,220,130,0.25);color:#5de0a8}
+.co-empty{color:var(--muted);font-style:italic;font-size:11px}
 
 /* ─── FAQ ─── */
 .faq-sec{background:var(--bg);border-top:1px solid var(--border)}
@@ -211,8 +264,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 60px
   <ul class="nav-links">
     <li><a href="#dome">Laplace Dome</a></li>
     <li><a href="#components">Components</a></li>
-    <li><a href="#approach">Approach</a></li>
-    <li><a href="#usecases">Use Cases</a></li>
+    <li><a href="#customers">Segments</a></li>
+    <li><a href="#market">Market</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Request Demo</a>
@@ -421,199 +474,475 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:40px 60px
   </div>
 </section>
 
-<!-- ═══ APPROACH ═══ -->
-<section class="sec approach-sec" id="approach">
-  <div class="sec-eyebrow reveal">Our Approach</div>
-  <h2 class="sec-title reveal">Not a Camera.<br><span class="yl">A System.</span></h2>
-  <p class="sec-desc reveal">A camera sees a moving object. Our CNN identifies what it is. Our fusion engine knows where it's going. Our controller intercepts it. Four distinct technical capabilities. One integrated chain.</p>
-  <div class="pillars reveal" style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
-    <div class="pillar">
-      <div class="pillar-title">Deep mathematics, not bolted-on AI</div>
-      <div class="pillar-desc">CNN architectures trained on real-world threat data. <span class="yl">Kalman-filter trajectory estimators.</span> Multi-sensor synchronisation algorithms. Closed-loop guidance logic from active operational experience.</div>
+<!-- ═══ CUSTOMER SEGMENTS & SCENARIOS ═══ -->
+<section class="sec seg-sec" id="customers">
+  <div class="sec-eyebrow reveal">Customer Segments & Scenarios</div>
+  <h2 class="sec-title reveal">Who We Protect &<br><span class="yl">How It Works.</span></h2>
+  <p class="sec-desc reveal">Nine segments. For each — the threat context and the specific scenarios the system handles.</p>
+
+  <div class="seg-grid reveal">
+
+    <!-- 01 AIRPORTS -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="2" width="4" height="6" fill="#f5d84a"/><rect x="12" y="8" width="8" height="3" fill="#f5d84a"/><rect x="4" y="11" width="24" height="3" fill="#f5d84a"/><rect x="2" y="14" width="28" height="2" fill="#f5d84a"/><rect x="8" y="16" width="3" height="5" fill="#f5d84a"/><rect x="21" y="16" width="3" height="5" fill="#f5d84a"/><rect x="13" y="21" width="6" height="3" fill="#f5d84a"/><rect x="10" y="24" width="12" height="3" fill="#f5d84a"/></svg>
+        <div class="seg-header-text">
+          <div class="seg-num">01</div>
+          <div class="seg-title">Airports</div>
+        </div>
+      </div>
+      <p class="seg-desc">Any drone — even a recreational one — entering the approach corridor forces an immediate halt to all landing and takeoff operations. One hour of closure at a busy airport costs millions in grounded aircraft, crew disruption, and passenger compensation. The cost of a single incident routinely exceeds the annual licence fee for a protection system.</p>
+      <div class="seg-scenarios">
+        <div class="seg-item"><button class="seg-q">Drone enters approach corridor during landing operations<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Detected at maximum range, classified as hostile, intercepted before reaching restricted airspace. No aircraft grounding required.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Unknown UAV loiters above runway threshold at night<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Night-capable detection identifies the intruder, behaviour profile flags it as a deliberate airspace violation, autonomous response dispatched immediately.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Multiple drones enter simultaneously from different vectors<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">All tracks managed in parallel. Each threat assigned an independent intercept mission. Priority sequenced by proximity and trajectory.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Drone carrying payload approaches terminal building<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Payload signature detected, threat level escalated, intercept executed before the drone reaches the building perimeter.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Recon drone maps airside security layout<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Loitering behaviour identified as surveillance. Intercepted before mapping data can be transmitted.</div></div></div>
+      </div>
     </div>
-    <div class="pillar">
-      <div class="pillar-title">Edge-native, connectivity-independent</div>
-      <div class="pillar-desc">All critical computation runs locally. No cloud dependency, no round-trip latency. <span class="yl">Fully operational in GPS-denied environments.</span></div>
+
+    <!-- 02 MILITARY -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="2" width="4" height="3" fill="#f5d84a"/><rect x="8" y="5" width="16" height="3" fill="#f5d84a"/><rect x="5" y="8" width="22" height="3" fill="#f5d84a"/><rect x="4" y="11" width="24" height="3" fill="#f5d84a"/><rect x="4" y="14" width="24" height="3" fill="#f5d84a"/><rect x="5" y="17" width="22" height="3" fill="#f5d84a"/><rect x="7" y="20" width="18" height="3" fill="#f5d84a"/><rect x="10" y="23" width="12" height="3" fill="#f5d84a"/><rect x="13" y="26" width="6" height="3" fill="#f5d84a"/></svg>
+        <div class="seg-header-text">
+          <div class="seg-num">02</div>
+          <div class="seg-title">Military Structures</div>
+        </div>
+      </div>
+      <p class="seg-desc">A $500 FPV drone carrying a small payload can destroy a $2 million vehicle or disable critical base infrastructure. Modern conflict has demonstrated that small commercial drones cause damage far beyond their cost. Bases without autonomous aerial defense are exposed continuously — attackers choose their moment, and human sentries cannot maintain vigilance around the clock.</p>
+      <div class="seg-scenarios">
+        <div class="seg-item"><button class="seg-q">FPV kamikaze drone targets a fuel depot<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Detected at distance, classified as strike threat, intercepted before reaching the target perimeter. Zero dependence on GPS or network connectivity.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Reconnaissance drone conducts persistent surveillance of base layout<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Loitering pattern identified, drone intercepted before intelligence can be relayed to an operator.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Coordinated swarm attack from multiple directions<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">All incoming tracks detected and managed simultaneously. Intercept missions sequenced and dispatched without operator involvement.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Drone drops munitions over a vehicle compound<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Threat detected on approach, classified by behaviour and trajectory, intercepted mid-flight.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Jamming environment renders communications unreliable<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">System operates fully on local edge hardware. No internet or GPS required. Protection continues uninterrupted.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Night-time drone incursion under low visibility<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Multi-sensor fusion — radar, acoustic, and thermal — maintains full detection capability regardless of visibility.</div></div></div>
+      </div>
     </div>
-    <div class="pillar">
-      <div class="pillar-title">Validated in real conditions</div>
-      <div class="pillar-desc">Riemann and Lagrange tested against real-world aerial threats — not benchmarks. Itō enables continuous improvement as threat profiles evolve.</div>
+
+    <!-- 03 PRISONS -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="28" height="3" fill="#f5d84a"/><rect x="2" y="27" width="28" height="3" fill="#f5d84a"/><rect x="2" y="2" width="3" height="28" fill="#f5d84a"/><rect x="27" y="2" width="3" height="28" fill="#f5d84a"/><rect x="8" y="5" width="3" height="22" fill="#f5d84a"/><rect x="14" y="5" width="3" height="22" fill="#f5d84a"/><rect x="20" y="5" width="3" height="22" fill="#f5d84a"/><rect x="5" y="14" width="22" height="3" fill="#f5d84a"/></svg>
+        <div class="seg-header-text">
+          <div class="seg-num">03</div>
+          <div class="seg-title">Prisons</div>
+        </div>
+      </div>
+      <p class="seg-desc">Drone-based contraband delivery is now the primary method for getting drugs, phones, and weapons into prisons across Europe. Each successful delivery undermines facility control, enables criminal coordination from inside, and exposes management to regulatory and legal liability. Walls, cameras, and guards have no answer to a drone arriving from above at night.</p>
+      <div class="seg-scenarios">
+        <div class="seg-item"><button class="seg-q">Drone drops contraband package inside the yard<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Drone detected on approach, intercepted before reaching the delivery point. Package never arrives.</div></div></div>
+        <div class="seg-item"><button class="seg-q">UAV surveys perimeter walls and guard positions<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Slow loitering flight pattern flagged as reconnaissance. Intercepted within seconds of identification.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Drone delivers tools or cutting equipment to a specific cell block<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Detected on approach trajectory, classified by flight path intent, neutralised before reaching the target zone.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Multiple drones operate simultaneously as a distraction during a breach attempt<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">All aerial threats tracked and intercepted in parallel. Ground security is alerted automatically.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Drone with mobile phone payload enables prohibited communications<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Low-altitude intrusion detected, intercepted, incident logged with full flight data for investigation.</div></div></div>
+      </div>
     </div>
-    <div class="pillar">
-      <div class="pillar-title">Operator always in command</div>
-      <div class="pillar-desc">Full autonomy with full human oversight. <span class="yl">Override capability at every stage.</span> The system acts; the operator controls.</div>
+
+    <!-- 04 GOVERNMENT -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="2" width="4" height="4" fill="#f5d84a"/><rect x="4" y="6" width="24" height="3" fill="#f5d84a"/><rect x="2" y="9" width="28" height="2" fill="#f5d84a"/><rect x="4" y="11" width="4" height="10" fill="#f5d84a"/><rect x="10" y="11" width="4" height="10" fill="#f5d84a"/><rect x="18" y="11" width="4" height="10" fill="#f5d84a"/><rect x="24" y="11" width="4" height="10" fill="#f5d84a"/><rect x="12" y="17" width="8" height="4" fill="#f5d84a"/><rect x="2" y="21" width="28" height="2" fill="#f5d84a"/><rect x="2" y="25" width="28" height="3" fill="#f5d84a"/></svg>
+        <div class="seg-header-text">
+          <div class="seg-num">04</div>
+          <div class="seg-title">Government & Border Security</div>
+        </div>
+      </div>
+      <p class="seg-desc">Government facilities and border zones are targets because of what they represent — authority, intelligence, and national sovereignty. A surveillance drone over an embassy or a ministry doesn't need to carry a weapon: the intelligence it collects can be worth more than any physical asset. At borders, undetected aerial crossings — whether carrying payloads or mapping sensor gaps — have consequences that compound over time.</p>
+      <div class="seg-scenarios">
+        <div class="seg-item"><button class="seg-q">Drone crosses a national border carrying an unknown payload<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Detected at the boundary, trajectory modelled, intercepted before penetrating protected territory.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Persistent drone surveillance of an embassy compound<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Loitering identified, threat classified, intercepted and logged. Full incident record available for diplomatic or legal proceedings.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Drone targets a government building during a public event<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Detected on approach, identified as threat, intercepted before reaching the structure. Event continues without disruption.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Drone maps border sensor positions for a future incursion<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Reconnaissance behaviour flagged, drone intercepted before data is transmitted, sensor locations remain undisclosed.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Multiple border crossing attempts across a 50km corridor overnight<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Networked nodes maintain overlapping coverage. Each incursion triggers an autonomous response at the nearest intercept asset.</div></div></div>
+      </div>
     </div>
+
+    <!-- 05 ENERGY -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="17" y="2" width="4" height="3" fill="#f5d84a"/><rect x="15" y="5" width="4" height="3" fill="#f5d84a"/><rect x="13" y="8" width="4" height="3" fill="#f5d84a"/><rect x="11" y="11" width="10" height="3" fill="#f5d84a"/><rect x="13" y="14" width="8" height="3" fill="#f5d84a"/><rect x="15" y="17" width="6" height="3" fill="#f5d84a"/><rect x="13" y="20" width="4" height="3" fill="#f5d84a"/><rect x="11" y="23" width="4" height="3" fill="#f5d84a"/><rect x="9" y="26" width="4" height="3" fill="#f5d84a"/></svg>
+        <div class="seg-header-text">
+          <div class="seg-num">05</div>
+          <div class="seg-title">Energy Infrastructure</div>
+        </div>
+      </div>
+      <p class="seg-desc">A strike on a single high-voltage transformer can black out an entire region for days or weeks — transformers take months to replace and are rarely held in stock. The cost of a prolonged outage, measured in economic disruption, emergency response, and infrastructure repair, runs into the hundreds of millions. Physical strikes on energy infrastructure are immediate and very difficult to reverse.</p>
+      <div class="seg-scenarios">
+        <div class="seg-item"><button class="seg-q">Drone on attack vector toward a transformer substation<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Detected at maximum range, classified as strike threat, intercepted before reaching the fence line. Grid integrity maintained.</div></div></div>
+        <div class="seg-item"><button class="seg-q">UAV conducts night reconnaissance of a power plant layout<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Low-light detection identifies the intruder. Flight pattern flagged as pre-attack mapping. Intercepted immediately.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Drone targets cooling infrastructure at a nuclear facility<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">High-priority classification triggers immediate autonomous response. No operator action required to initiate intercept.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Pipeline inspection drone is spoofed and redirected toward a pumping station<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Anomalous trajectory triggers reclassification. Threat response initiated even for previously authorised platforms.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Coordinated attack on multiple nodes of a transmission network<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Simultaneous threats across multiple sites managed through networked deployment. Each node responds independently.</div></div></div>
+      </div>
+    </div>
+
+    <!-- 06 PORTS -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="13" y="2" width="6" height="3" fill="#f5d84a"/><rect x="11" y="5" width="10" height="3" fill="#f5d84a"/><rect x="13" y="8" width="6" height="3" fill="#f5d84a"/><rect x="14" y="11" width="4" height="14" fill="#f5d84a"/><rect x="5" y="11" width="9" height="3" fill="#f5d84a"/><rect x="18" y="11" width="9" height="3" fill="#f5d84a"/><rect x="5" y="23" width="5" height="3" fill="#f5d84a"/><rect x="22" y="23" width="5" height="3" fill="#f5d84a"/><rect x="5" y="26" width="9" height="3" fill="#f5d84a"/><rect x="18" y="26" width="9" height="3" fill="#f5d84a"/></svg>
+        <div class="seg-header-text">
+          <div class="seg-num">06</div>
+          <div class="seg-title">Ports & Logistics</div>
+        </div>
+      </div>
+      <p class="seg-desc">A major port processes billions in cargo every week. A drone over the port basin can map container positions, cargo schedules, and security patterns in minutes — intelligence that enables theft, smuggling, or a targeted strike. The disruption of a key port, even for 24 hours, cascades through supply chains across entire industries and countries.</p>
+      <div class="seg-scenarios">
+        <div class="seg-item"><button class="seg-q">Drone surveys container positions and cargo manifests<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Loitering behaviour over operational areas flagged as hostile reconnaissance. Intercepted before data leaves the site.</div></div></div>
+        <div class="seg-item"><button class="seg-q">UAV maps security camera positions and guard patrol routes<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Systematic flight pattern identified as intelligence gathering. Drone intercepted, incident reported to port security.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Drone delivers contraband into a bonded warehouse zone<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Approach trajectory and descent profile detected, drone intercepted before delivery point is reached.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Authorised logistics drone is hijacked and redirected<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Deviation from filed flight plan triggers threat reclassification. Response initiated against the compromised platform.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Drone targets fuel storage tanks in the port basin<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Strike trajectory identified, high-priority intercept dispatched, threat neutralised before reaching the target.</div></div></div>
+      </div>
+    </div>
+
+    <!-- 07 GAS & OIL -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="2" width="4" height="3" fill="#f5d84a"/><rect x="11" y="5" width="4" height="3" fill="#f5d84a"/><rect x="17" y="5" width="4" height="3" fill="#f5d84a"/><rect x="9" y="8" width="14" height="3" fill="#f5d84a"/><rect x="7" y="11" width="18" height="3" fill="#f5d84a"/><rect x="6" y="14" width="20" height="3" fill="#f5d84a"/><rect x="6" y="17" width="20" height="3" fill="#f5d84a"/><rect x="8" y="20" width="16" height="3" fill="#f5d84a"/><rect x="11" y="23" width="10" height="3" fill="#f5d84a"/><rect x="13" y="26" width="6" height="3" fill="#f5d84a"/></svg>
+        <div class="seg-header-text">
+          <div class="seg-num">07</div>
+          <div class="seg-title">Gas & Oil</div>
+        </div>
+      </div>
+      <p class="seg-desc">Oil and gas infrastructure spans vast, often remote areas — pipelines, compression stations, refineries, and offshore platforms that cannot all be staffed around the clock. A drone strike doesn't just damage equipment: it triggers environmental incidents, regulatory investigations, and supply disruptions that take months and hundreds of millions to resolve. The remote footprint makes conventional security impractical.</p>
+      <div class="seg-scenarios">
+        <div class="seg-item"><button class="seg-q">Drone targets an exposed pipeline section in a remote location<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Long-range detection along the pipeline corridor identifies the threat. Intercept dispatched with no staffing required on-site.</div></div></div>
+        <div class="seg-item"><button class="seg-q">UAV surveys a refinery for structural vulnerabilities<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Systematic loitering flight detected, reconnaissance intent flagged, drone intercepted before intelligence is transmitted.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Drone approaches a gas compression station<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Approach vector toward critical equipment triggers immediate high-priority response. Threat neutralised before reaching the exclusion zone.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Multiple drones coordinate simultaneous attacks on an offshore platform<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">All tracks managed in parallel across the full airspace perimeter. Each threat assigned an independent intercept.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Poor visibility reduces human patrol effectiveness<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Radar and acoustic sensors maintain full detection capability in rain, fog, and darkness. System performance is weather-independent.</div></div></div>
+      </div>
+    </div>
+
+    <!-- 08 CHEMICAL -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="2" width="4" height="14" fill="#f5d84a"/><rect x="14" y="2" width="4" height="14" fill="#f5d84a"/><rect x="4" y="16" width="24" height="2" fill="#f5d84a"/><rect x="2" y="18" width="28" height="2" fill="#f5d84a"/><rect x="2" y="20" width="28" height="8" fill="#f5d84a"/><rect x="4" y="16" width="8" height="6" fill="#f5d84a"/><rect x="14" y="16" width="8" height="6" fill="#f5d84a"/><rect x="6" y="22" width="4" height="6" fill="#f5d84a"/><rect x="16" y="22" width="4" height="6" fill="#f5d84a"/><rect x="22" y="22" width="6" height="6" fill="#f5d84a"/><rect x="2" y="28" width="28" height="2" fill="#f5d84a"/></svg>
+        <div class="seg-header-text">
+          <div class="seg-num">08</div>
+          <div class="seg-title">Chemical & Industrial Production</div>
+        </div>
+      </div>
+      <p class="seg-desc">A drone strike on a chemical storage or production facility is not just a physical threat — it is a public safety emergency. A toxic release forces mass evacuation, contaminates land and water, triggers regulatory shutdowns, and generates liability exposure that outlasts the physical damage by years. Aerial surveillance of production processes is also a growing vector for industrial espionage.</p>
+      <div class="seg-scenarios">
+        <div class="seg-item"><button class="seg-q">Drone targets a chemical storage tank<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Approach trajectory identified as a strike vector, threat intercepted before reaching the tank farm perimeter. Catastrophic release prevented.</div></div></div>
+        <div class="seg-item"><button class="seg-q">UAV films production processes for industrial espionage<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Low-altitude surveillance flight detected, classified by behaviour, intercepted before proprietary process data is captured.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Drone drops a payload into an open-top reactor or mixing vessel<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Descent trajectory toward production equipment identified, drone intercepted mid-approach.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Persistent airspace intrusion during a facility shutdown with reduced staffing<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">System maintains continuous protection regardless of operational status or staffing level.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Regulatory audit requires evidence of perimeter security capability<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Full incident logging, flight data, and automated response records available for compliance documentation.</div></div></div>
+      </div>
+    </div>
+
+    <!-- 09 UAV OEM -->
+    <div class="seg-card">
+      <div class="seg-header">
+        <svg class="seg-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="14" y="14" width="4" height="4" fill="#f5d84a"/><rect x="10" y="12" width="12" height="8" fill="#f5d84a"/><rect x="2" y="6" width="6" height="6" fill="#f5d84a"/><rect x="24" y="6" width="6" height="6" fill="#f5d84a"/><rect x="2" y="20" width="6" height="6" fill="#f5d84a"/><rect x="24" y="20" width="6" height="6" fill="#f5d84a"/><rect x="8" y="11" width="4" height="2" fill="#f5d84a"/><rect x="20" y="11" width="4" height="2" fill="#f5d84a"/><rect x="8" y="19" width="4" height="2" fill="#f5d84a"/><rect x="20" y="19" width="4" height="2" fill="#f5d84a"/></svg>
+        <div class="seg-header-text">
+          <div class="seg-num">09</div>
+          <div class="seg-title">UAV Manufacturers — OEM</div>
+        </div>
+      </div>
+      <p class="seg-desc">Building autonomous AI detection and guidance capability from scratch requires years of development and specialist machine learning engineers — resources most UAV manufacturers do not have. The market for autonomous interceptors is growing fast, and the gap between hardware-only platforms and AI-powered ones is widening. Manufacturers who integrate proven autonomy software ship better products faster.</p>
+      <div class="seg-scenarios">
+        <div class="seg-item"><button class="seg-q">Platform cannot detect and classify aerial targets independently<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Detection and classification software integrated directly onto the UAV's onboard compute. Platform gains autonomous identification capability without custom development.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Interceptor drone relies on human operator for terminal guidance<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Autonomous guidance logic integrated onto the platform. Terminal manoeuvring executed without operator input, reducing reaction time to machine speed.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Platform performs poorly against small, fast-moving targets<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">AI model trained specifically on low-signature aerial threats, integrated and calibrated for the platform's sensor configuration.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Platform loses effectiveness when GPS is denied or jammed<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">GPS-independent navigation and guidance logic replaces GPS-reliant systems. Platform maintains full operational capability in contested environments.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Developing AI capability in-house requires years and specialist talent<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">Proven software modules licensed and integrated in weeks. Manufacturer ships a capable autonomous platform without building the AI stack from scratch.</div></div></div>
+        <div class="seg-item"><button class="seg-q">Platform needs to handle new drone types as threats evolve<span class="seg-icon">+</span></button><div class="seg-body"><div class="seg-body-inner">AI models updated continuously via the simulation and training pipeline. Platform capability improves over time without hardware changes.</div></div></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ═══ CUSTOMERS ═══ -->
-<section class="sec customers-sec" id="customers">
-  <div class="sec-eyebrow reveal">Who We Protect</div>
-  <h2 class="sec-title reveal">Critical <span class="yl">Infrastructure.</span><br>At Every Scale.</h2>
-  <p class="sec-desc reveal">The same threats affect facilities of every type and size. Laplace Dome scales to match.</p>
+<!-- ═══ MARKET TABLE ═══ -->
+<section class="sec mkt-sec" id="market">
+  <div class="sec-eyebrow reveal">Market Sizing</div>
+  <h2 class="sec-title reveal">Potential <span class="yl">Protected Sites</span><br>by Country</h2>
+  <p class="sec-desc reveal" style="max-width:800px">Estimated number of deployable sites per customer segment and country. Figures cover: commercial airports and major military airfields / active prisons / major military installations / government ministries and border zones / operating nuclear and thermal power plants / commercial seaports / refineries, LNG terminals, and pipeline compressor stations / major chemical and industrial production facilities / UAV manufacturers with intercept-capable platforms.</p>
 
-  <div class="cust-grid">
-    <div class="cust-card reveal">
-      <!-- Airport pixel icon -->
-      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="14" y="2" width="4" height="6" fill="#f5d84a"/>
-        <rect x="12" y="8" width="8" height="4" fill="#f5d84a"/>
-        <rect x="4" y="12" width="24" height="3" fill="#f5d84a"/>
-        <rect x="2" y="15" width="28" height="2" fill="#f5d84a"/>
-        <rect x="8" y="17" width="3" height="5" fill="#f5d84a"/>
-        <rect x="21" y="17" width="3" height="5" fill="#f5d84a"/>
-        <rect x="14" y="22" width="4" height="3" fill="#f5d84a"/>
-        <rect x="10" y="25" width="12" height="3" fill="#f5d84a"/>
-        <rect x="6" y="17" width="2" height="2" fill="#f5d84a"/>
-        <rect x="24" y="17" width="2" height="2" fill="#f5d84a"/>
-      </svg>
-      <div class="cust-name">Airports & Aviation</div>
-      <div class="cust-desc">Eliminate the drone incursion cost that grounds aircraft and costs airlines millions. From approach corridor monitoring to full airspace protection.</div>
-    </div>
-
-    <div class="cust-card reveal">
-      <!-- Energy / lightning bolt pixel icon -->
-      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="17" y="2" width="4" height="3" fill="#f5d84a"/>
-        <rect x="15" y="5" width="4" height="3" fill="#f5d84a"/>
-        <rect x="13" y="8" width="4" height="3" fill="#f5d84a"/>
-        <rect x="11" y="11" width="10" height="3" fill="#f5d84a"/>
-        <rect x="13" y="14" width="8" height="3" fill="#f5d84a"/>
-        <rect x="15" y="17" width="6" height="3" fill="#f5d84a"/>
-        <rect x="13" y="20" width="4" height="3" fill="#f5d84a"/>
-        <rect x="11" y="23" width="4" height="3" fill="#f5d84a"/>
-        <rect x="9" y="26" width="4" height="3" fill="#f5d84a"/>
-      </svg>
-      <div class="cust-name">Energy Infrastructure</div>
-      <div class="cust-desc">Power plants, substations, pipelines. Assets where a single strike has cascading national consequences. Protection that responds before the threat reaches the perimeter.</div>
-    </div>
-
-    <div class="cust-card reveal">
-      <!-- Water drop pixel icon -->
-      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="14" y="2" width="4" height="3" fill="#f5d84a"/>
-        <rect x="11" y="5" width="10" height="3" fill="#f5d84a"/>
-        <rect x="9"  y="8" width="14" height="3" fill="#f5d84a"/>
-        <rect x="7"  y="11" width="18" height="3" fill="#f5d84a"/>
-        <rect x="6"  y="14" width="20" height="3" fill="#f5d84a"/>
-        <rect x="6"  y="17" width="20" height="3" fill="#f5d84a"/>
-        <rect x="7"  y="20" width="18" height="3" fill="#f5d84a"/>
-        <rect x="9"  y="23" width="14" height="3" fill="#f5d84a"/>
-        <rect x="12" y="26" width="8"  height="3" fill="#f5d84a"/>
-      </svg>
-      <div class="cust-name">Water & Civil Utilities</div>
-      <div class="cust-desc">Reservoirs and treatment facilities. Detect pre-attack reconnaissance before damage is planned — behavioural classification identifies hostile intent early.</div>
-    </div>
-
-    <div class="cust-card reveal">
-      <!-- Port / anchor pixel icon -->
-      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="13" y="2"  width="6" height="3" fill="#f5d84a"/>
-        <rect x="11" y="5"  width="10" height="3" fill="#f5d84a"/>
-        <rect x="13" y="8"  width="6" height="3" fill="#f5d84a"/>
-        <rect x="14" y="11" width="4" height="14" fill="#f5d84a"/>
-        <rect x="5"  y="11" width="8" height="3" fill="#f5d84a"/>
-        <rect x="19" y="11" width="8" height="3" fill="#f5d84a"/>
-        <rect x="5"  y="23" width="5" height="3" fill="#f5d84a"/>
-        <rect x="22" y="23" width="5" height="3" fill="#f5d84a"/>
-        <rect x="5"  y="26" width="8" height="3" fill="#f5d84a"/>
-        <rect x="19" y="26" width="8" height="3" fill="#f5d84a"/>
-      </svg>
-      <div class="cust-name">Ports & Logistics Hubs</div>
-      <div class="cust-desc">Persistent aerial surveillance detection across multi-zone facilities. Distinguishes logistics drones from hostile actors. Works with existing port security infrastructure.</div>
-    </div>
-
-    <div class="cust-card reveal">
-      <!-- Stadium pixel icon -->
-      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="2"  y="6"  width="4" height="20" fill="#f5d84a"/>
-        <rect x="26" y="6"  width="4" height="20" fill="#f5d84a"/>
-        <rect x="6"  y="6"  width="20" height="3" fill="#f5d84a"/>
-        <rect x="6"  y="23" width="20" height="3" fill="#f5d84a"/>
-        <rect x="6"  y="12" width="4"  height="2" fill="#f5d84a"/>
-        <rect x="13" y="12" width="6"  height="2" fill="#f5d84a"/>
-        <rect x="22" y="12" width="4"  height="2" fill="#f5d84a"/>
-        <rect x="6"  y="17" width="4"  height="2" fill="#f5d84a"/>
-        <rect x="13" y="17" width="6"  height="2" fill="#f5d84a"/>
-        <rect x="22" y="17" width="4"  height="2" fill="#f5d84a"/>
-        <rect x="2"  y="26" width="28" height="3" fill="#f5d84a"/>
-      </svg>
-      <div class="cust-name">Events & Public Gatherings</div>
-      <div class="cust-desc">Temporary deployable protection over stadiums and summits. Full autonomous response, no specialist operators required on-site.</div>
-    </div>
-
-    <div class="cust-card reveal">
-      <!-- Government building pixel icon -->
-      <svg class="cust-ico" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="14" y="2"  width="4" height="4" fill="#f5d84a"/>
-        <rect x="4"  y="6"  width="24" height="3" fill="#f5d84a"/>
-        <rect x="2"  y="9"  width="28" height="2" fill="#f5d84a"/>
-        <rect x="4"  y="11" width="4" height="10" fill="#f5d84a"/>
-        <rect x="10" y="11" width="4" height="10" fill="#f5d84a"/>
-        <rect x="18" y="11" width="4" height="10" fill="#f5d84a"/>
-        <rect x="24" y="11" width="4" height="10" fill="#f5d84a"/>
-        <rect x="12" y="17" width="8" height="4"  fill="#f5d84a"/>
-        <rect x="2"  y="21" width="28" height="2" fill="#f5d84a"/>
-        <rect x="2"  y="25" width="28" height="3" fill="#f5d84a"/>
-      </svg>
-      <div class="cust-name">Government & Border Security</div>
-      <div class="cust-desc">From embassy compounds to national borders. Networked nodes create seamless defended lines. Continuous, autonomous, without fatigue or gaps.</div>
-    </div>
+  <div class="mkt-table-wrap reveal">
+    <table class="mkt-table">
+      <thead>
+        <tr>
+          <th class="mkt-seg-h">Segment</th>
+          <th>CZ</th><th>PL</th><th>RO</th><th>MD</th><th>BG</th>
+          <th>FI</th><th>SE</th><th>NL</th><th>FR</th><th>DE</th><th>BE</th><th>DK</th><th>IT</th><th>UK</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="mkt-seg">01 &nbsp;Airports</td>
+          <td>7</td><td>15</td><td>10</td><td class="mkt-low">2</td><td>5</td>
+          <td>25</td><td>28</td><td>8</td><td class="mkt-hi">45</td><td class="mkt-hi">40</td><td>8</td><td>9</td><td class="mkt-hi">38</td><td class="mkt-hi">50</td>
+        </tr>
+        <tr>
+          <td class="mkt-seg">02 &nbsp;Military Structures</td>
+          <td>12</td><td class="mkt-hi">30</td><td>20</td><td class="mkt-low">4</td><td>10</td>
+          <td>15</td><td>18</td><td>14</td><td class="mkt-hi">55</td><td class="mkt-hi">60</td><td>12</td><td>12</td><td class="mkt-hi">40</td><td class="mkt-hi">45</td>
+        </tr>
+        <tr>
+          <td class="mkt-seg">03 &nbsp;Prisons</td>
+          <td>35</td><td class="mkt-hi">215</td><td>44</td><td class="mkt-low">17</td><td>14</td>
+          <td>28</td><td>60</td><td>28</td><td class="mkt-hi">188</td><td class="mkt-hi">194</td><td>26</td><td>15</td><td class="mkt-hi">205</td><td class="mkt-hi">145</td>
+        </tr>
+        <tr>
+          <td class="mkt-seg">04 &nbsp;Government & Borders</td>
+          <td>8</td><td>12</td><td>10</td><td class="mkt-low">5</td><td>8</td>
+          <td>8</td><td>10</td><td>10</td><td class="mkt-hi">30</td><td class="mkt-hi">35</td><td>10</td><td>8</td><td class="mkt-hi">25</td><td class="mkt-hi">65</td>
+        </tr>
+        <tr>
+          <td class="mkt-seg">05 &nbsp;Energy Infrastructure</td>
+          <td>4</td><td>8</td><td>4</td><td class="mkt-low">1</td><td>4</td>
+          <td>4</td><td>9</td><td>2</td><td class="mkt-hi">56</td><td class="mkt-low">0</td><td>7</td><td class="mkt-low">0</td><td>8</td><td>9</td>
+        </tr>
+        <tr>
+          <td class="mkt-seg">06 &nbsp;Ports & Logistics</td>
+          <td class="mkt-low">0</td><td>5</td><td>3</td><td class="mkt-low">1</td><td>3</td>
+          <td>6</td><td>9</td><td class="mkt-hi">10</td><td>8</td><td>7</td><td>2</td><td>5</td><td class="mkt-hi">25</td><td class="mkt-hi">30</td>
+        </tr>
+        <tr>
+          <td class="mkt-seg">07 &nbsp;Gas & Oil</td>
+          <td>3</td><td>12</td><td>10</td><td class="mkt-low">2</td><td>5</td>
+          <td>8</td><td>10</td><td>12</td><td class="mkt-hi">20</td><td class="mkt-hi">18</td><td>6</td><td>5</td><td class="mkt-hi">20</td><td class="mkt-hi">22</td>
+        </tr>
+        <tr>
+          <td class="mkt-seg">08 &nbsp;Chemical & Industrial</td>
+          <td>20</td><td>45</td><td>25</td><td class="mkt-low">5</td><td>15</td>
+          <td>20</td><td>30</td><td>45</td><td class="mkt-hi">120</td><td class="mkt-hi">180</td><td>40</td><td>15</td><td class="mkt-hi">110</td><td class="mkt-hi">150</td>
+        </tr>
+        <tr class="mkt-total">
+          <td class="mkt-seg">Total sites</td>
+          <td>89</td><td>342</td><td>126</td><td>37</td><td>64</td>
+          <td>114</td><td>174</td><td>129</td><td>522</td><td>534</td><td>111</td><td>69</td><td>471</td><td class="mkt-hi">516</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-</section>
 
-<!-- ═══ USE CASES ═══ -->
-<section class="sec usecases-sec" id="usecases">
-  <div class="sec-eyebrow reveal">Use Cases</div>
-  <h2 class="sec-title reveal">From Substations<br>to <span class="yl">State Borders.</span></h2>
-  <p class="sec-desc reveal">Nine real-world deployment scenarios. Same core technology — configuration adapts to the site.</p>
+  <div class="mkt-legend reveal">
+    <div class="mkt-legend-item"><span class="mkt-dot mkt-dot-hi"></span> 20+ sites</div>
+    <div class="mkt-legend-item"><span class="mkt-dot mkt-dot-mid"></span> 5–19 sites</div>
+    <div class="mkt-legend-item"><span class="mkt-dot mkt-dot-low"></span> 0–4 sites</div>
+  </div>
 
-  <div class="uc-grid">
-    <div class="uc-card reveal">
-      <div class="uc-num">01</div>
-      <div class="uc-title">Energy Infrastructure</div>
-      <div class="uc-scenario">A hostile drone approaches a transformer yard. Manual response is too slow — the window is seconds.</div>
+  <p class="mkt-sources reveal">Sources: OurAirports database; Council of Europe SPACE report / Eurostat prison statistics; NATO / national defence white papers; World Nuclear Association & ENS (operating reactors); ESPO European Sea Ports Organisation; IEA & Eurostat energy infrastructure data; EuroChem industry databases. Nuclear energy column (row 05) reflects operating reactor sites — Germany phased out in April 2023, Poland and Denmark have none operational. Government/border row covers central ministries, major embassy compounds, and land border zones requiring airspace protection. Military figures cover major garrisons and active airfields only.</p>
+
+  <!-- ── SUPPLIERS & INTEGRATORS TABLE ── -->
+  <div style="margin-top:72px" class="reveal">
+    <div class="sec-eyebrow" style="margin-bottom:14px">Suppliers & Integrators</div>
+    <h3 class="sec-title" style="font-size:clamp(24px,2.8vw,40px);margin-bottom:12px">Counter-UAS Suppliers &<br><span class="yl">Security Integrators</span> by Country</h3>
+    <p class="sec-desc" style="max-width:860px;margin-bottom:28px">Counter-UAS and defence technology suppliers and security systems integrators active in each country, by segment. Use the segment filter to focus on a specific market. Three company types are shown.</p>
+
+    <div class="co-legend">
+      <div class="co-leg-item"><span class="co-leg-dot co-nat"></span>National / domestic C-UAS or defence tech company</div>
+      <div class="co-leg-item"><span class="co-leg-dot co-int"></span>International C-UAS / defence company with market presence</div>
+      <div class="co-leg-item"><span class="co-leg-dot co-itg"></span>Security systems integrator — potential integration partner</div>
     </div>
-    <div class="uc-card reveal">
-      <div class="uc-num">02</div>
-      <div class="uc-title">Civil Aviation — Airports</div>
-      <div class="uc-scenario">An unauthorised drone enters airport airspace. Current procedure: ground all aircraft, millions lost per incident.</div>
+
+    <div class="co-filters">
+      <button class="co-btn active" onclick="coFilter('all',this)">All Segments</button>
+      <button class="co-btn" onclick="coFilter('ap',this)">Airports</button>
+      <button class="co-btn" onclick="coFilter('mi',this)">Military</button>
+      <button class="co-btn" onclick="coFilter('pr',this)">Prisons</button>
+      <button class="co-btn" onclick="coFilter('go',this)">Government & Borders</button>
+      <button class="co-btn" onclick="coFilter('en',this)">Energy</button>
+      <button class="co-btn" onclick="coFilter('po',this)">Ports</button>
+      <button class="co-btn" onclick="coFilter('ga',this)">Gas & Oil</button>
+      <button class="co-btn" onclick="coFilter('ch',this)">Chemical & Industrial</button>
     </div>
-    <div class="uc-card reveal">
-      <div class="uc-num">03</div>
-      <div class="uc-title">Water Treatment Facilities</div>
-      <div class="uc-scenario">A recon drone circles a water facility at night, mapping sensor locations before a follow-on attack.</div>
+
+    <div class="co-table-wrap">
+      <table class="co-table" id="co-tbl">
+        <thead><tr>
+          <th class="co-country-h">Country</th>
+          <th data-cs="ap">Airports</th>
+          <th data-cs="mi">Military</th>
+          <th data-cs="pr">Prisons</th>
+          <th data-cs="go">Gov't & Borders</th>
+          <th data-cs="en">Energy</th>
+          <th data-cs="po">Ports</th>
+          <th data-cs="ga">Gas & Oil</th>
+          <th data-cs="ch">Chemical & Industrial</th>
+        </tr></thead>
+        <tbody>
+
+        <tr>
+          <td class="co-country">Czech Republic</td>
+          <td data-cs="ap"><a href="https://www.era.aero" target="_blank" rel="noopener" class="co-tag co-nat">ERA (Eldis)</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas CZ</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S CZ</a></td>
+          <td data-cs="mi"><a href="https://www.era.aero" target="_blank" rel="noopener" class="co-tag co-nat">ERA (Eldis)</a><a href="https://www.retia.cz" target="_blank" rel="noopener" class="co-tag co-nat">RETIA</a><a href="https://www.csgaerospace.cz" target="_blank" rel="noopener" class="co-tag co-nat">CSG Aerospace</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-int">Rheinmetall</a><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-int">Leonardo</a><a href="https://www.ramet.cz" target="_blank" rel="noopener" class="co-tag co-itg">Ramet</a></td>
+          <td data-cs="pr"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.d-fendsolutions.com" target="_blank" rel="noopener" class="co-tag co-int">D-Fend Solutions</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas CZ</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S CZ</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens CZ</a></td>
+          <td data-cs="go"><a href="https://www.era.aero" target="_blank" rel="noopener" class="co-tag co-nat">ERA (Eldis)</a><a href="https://www.retia.cz" target="_blank" rel="noopener" class="co-tag co-nat">RETIA</a><a href="https://www.indracompany.com" target="_blank" rel="noopener" class="co-tag co-int">Indra</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-itg">Thales CZ</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens CZ</a></td>
+          <td data-cs="en"><a href="https://www.era.aero" target="_blank" rel="noopener" class="co-tag co-nat">ERA (Eldis)</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens CZ</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell CZ</a></td>
+          <td data-cs="po"><span class="co-empty">—</span></td>
+          <td data-cs="ga"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens CZ</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell CZ</a></td>
+          <td data-cs="ch"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens CZ</a><a href="https://www.boschsecurity.com" target="_blank" rel="noopener" class="co-tag co-itg">Bosch Security</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">Poland</td>
+          <td data-cs="ap"><a href="https://www.wbelectronics.pl" target="_blank" rel="noopener" class="co-tag co-nat">WB Electronics</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.weibel.dk" target="_blank" rel="noopener" class="co-tag co-int">Weibel Scientific</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas PL</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S PL</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens PL</a></td>
+          <td data-cs="mi"><a href="https://www.wbelectronics.pl" target="_blank" rel="noopener" class="co-tag co-nat">WB Electronics</a><a href="https://www.pgzsa.pl" target="_blank" rel="noopener" class="co-tag co-nat">PGZ</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-int">Rheinmetall</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-int">MBDA</a><a href="https://www.rtx.com" target="_blank" rel="noopener" class="co-tag co-int">Raytheon</a><a href="https://www.radmor.com.pl" target="_blank" rel="noopener" class="co-tag co-itg">Radmor</a></td>
+          <td data-cs="pr"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.d-fendsolutions.com" target="_blank" rel="noopener" class="co-tag co-int">D-Fend Solutions</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas PL</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S PL</a><a href="https://www.johnsoncontrols.com" target="_blank" rel="noopener" class="co-tag co-itg">Johnson Controls PL</a></td>
+          <td data-cs="go"><a href="https://www.wbelectronics.pl" target="_blank" rel="noopener" class="co-tag co-nat">WB Electronics</a><a href="https://www.pgzsa.pl" target="_blank" rel="noopener" class="co-tag co-nat">PGZ</a><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-int">HENSOLDT</a><a href="https://www.indracompany.com" target="_blank" rel="noopener" class="co-tag co-int">Indra</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens PL</a></td>
+          <td data-cs="en"><a href="https://www.wbelectronics.pl" target="_blank" rel="noopener" class="co-tag co-nat">WB Electronics</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-int">HENSOLDT</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens PL</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell PL</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB PL</a></td>
+          <td data-cs="po"><a href="https://www.wbelectronics.pl" target="_blank" rel="noopener" class="co-tag co-nat">WB Electronics</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas PL</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens PL</a></td>
+          <td data-cs="ga"><a href="https://www.wbelectronics.pl" target="_blank" rel="noopener" class="co-tag co-nat">WB Electronics</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell PL</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB PL</a></td>
+          <td data-cs="ch"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-int">HENSOLDT</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens PL</a><a href="https://www.boschsecurity.com" target="_blank" rel="noopener" class="co-tag co-itg">Bosch Security</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">Romania</td>
+          <td data-cs="ap"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas RO</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S RO</a></td>
+          <td data-cs="mi"><a href="https://www.romtehnica.ro" target="_blank" rel="noopener" class="co-tag co-nat">Romtehnica</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-int">Rheinmetall</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-int">MBDA</a><a href="https://www.rtx.com" target="_blank" rel="noopener" class="co-tag co-int">Raytheon</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-itg">Thales RO</a></td>
+          <td data-cs="pr"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas RO</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S RO</a><a href="https://www.johnsoncontrols.com" target="_blank" rel="noopener" class="co-tag co-itg">Johnson Controls RO</a></td>
+          <td data-cs="go"><a href="https://www.romtehnica.ro" target="_blank" rel="noopener" class="co-tag co-nat">Romtehnica</a><a href="https://www.indracompany.com" target="_blank" rel="noopener" class="co-tag co-int">Indra</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens RO</a></td>
+          <td data-cs="en"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens RO</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB RO</a></td>
+          <td data-cs="po"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas RO</a></td>
+          <td data-cs="ga"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell RO</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB RO</a></td>
+          <td data-cs="ch"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens RO</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">Moldova</td>
+          <td data-cs="ap"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S MD</a></td>
+          <td data-cs="mi"><a href="https://www.wbelectronics.pl" target="_blank" rel="noopener" class="co-tag co-int">WB Electronics</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-int">Rheinmetall</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-itg">Thales</a></td>
+          <td data-cs="pr"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S MD</a></td>
+          <td data-cs="go"><a href="https://www.indracompany.com" target="_blank" rel="noopener" class="co-tag co-int">Indra</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens MD</a></td>
+          <td data-cs="en"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens MD</a></td>
+          <td data-cs="po"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a></td>
+          <td data-cs="ga"><span class="co-empty">—</span></td>
+          <td data-cs="ch"><span class="co-empty">—</span></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">Bulgaria</td>
+          <td data-cs="ap"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-int">Leonardo</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas BG</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S BG</a></td>
+          <td data-cs="mi"><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-int">Leonardo</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-int">MBDA</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-int">Rheinmetall</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-itg">Thales BG</a></td>
+          <td data-cs="pr"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas BG</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S BG</a></td>
+          <td data-cs="go"><a href="https://www.indracompany.com" target="_blank" rel="noopener" class="co-tag co-int">Indra</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens BG</a></td>
+          <td data-cs="en"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-int">Leonardo</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens BG</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB BG</a></td>
+          <td data-cs="po"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S BG</a></td>
+          <td data-cs="ga"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell BG</a></td>
+          <td data-cs="ch"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens BG</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">Finland</td>
+          <td data-cs="ap"><a href="https://www.patria.fi" target="_blank" rel="noopener" class="co-tag co-nat">Patria</a><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.weibel.dk" target="_blank" rel="noopener" class="co-tag co-int">Weibel Scientific</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas FI</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S FI</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens FI</a></td>
+          <td data-cs="mi"><a href="https://www.patria.fi" target="_blank" rel="noopener" class="co-tag co-nat">Patria</a><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-int">MBDA</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-int">Rheinmetall</a><a href="https://www.bittium.com" target="_blank" rel="noopener" class="co-tag co-itg">Insta (Bittium)</a></td>
+          <td data-cs="pr"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.d-fendsolutions.com" target="_blank" rel="noopener" class="co-tag co-int">D-Fend Solutions</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas FI</a><a href="https://www.johnsoncontrols.com" target="_blank" rel="noopener" class="co-tag co-itg">Johnson Controls FI</a></td>
+          <td data-cs="go"><a href="https://www.patria.fi" target="_blank" rel="noopener" class="co-tag co-nat">Patria</a><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.indracompany.com" target="_blank" rel="noopener" class="co-tag co-int">Indra</a><a href="https://www.bittium.com" target="_blank" rel="noopener" class="co-tag co-itg">Bittium</a></td>
+          <td data-cs="en"><a href="https://www.patria.fi" target="_blank" rel="noopener" class="co-tag co-nat">Patria</a><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB FI</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens FI</a></td>
+          <td data-cs="po"><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas FI</a></td>
+          <td data-cs="ga"><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB FI</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell FI</a></td>
+          <td data-cs="ch"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.boschsecurity.com" target="_blank" rel="noopener" class="co-tag co-itg">Bosch Security FI</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">Sweden</td>
+          <td data-cs="ap"><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-nat">Saab</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas SE</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S SE</a><a href="https://www.axis.com" target="_blank" rel="noopener" class="co-tag co-itg">Axis Communications</a></td>
+          <td data-cs="mi"><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-nat">Saab</a><a href="https://www.nordicairdefence.com" target="_blank" rel="noopener" class="co-tag co-nat">Nordic Air Defence</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-int">MBDA</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-int">Rheinmetall</a><a href="https://www.baesystems.com" target="_blank" rel="noopener" class="co-tag co-itg">BAE Hägglunds</a></td>
+          <td data-cs="pr"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.d-fendsolutions.com" target="_blank" rel="noopener" class="co-tag co-int">D-Fend Solutions</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas SE</a><a href="https://www.johnsoncontrols.com" target="_blank" rel="noopener" class="co-tag co-itg">Johnson Controls SE</a></td>
+          <td data-cs="go"><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-nat">Saab</a><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-int">HENSOLDT</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas SE</a><a href="https://www.axis.com" target="_blank" rel="noopener" class="co-tag co-itg">Axis Communications</a></td>
+          <td data-cs="en"><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-nat">Saab</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB SE</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens SE</a></td>
+          <td data-cs="po"><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-nat">Saab</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas SE</a></td>
+          <td data-cs="ga"><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-nat">Saab</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB SE</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell SE</a></td>
+          <td data-cs="ch"><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-nat">Saab</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.axis.com" target="_blank" rel="noopener" class="co-tag co-itg">Axis Communications</a><a href="https://www.boschsecurity.com" target="_blank" rel="noopener" class="co-tag co-itg">Bosch Security SE</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">Netherlands</td>
+          <td data-cs="ap"><a href="https://www.robinradar.com" target="_blank" rel="noopener" class="co-tag co-nat">Robin Radar</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas NL</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S NL</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens NL</a></td>
+          <td data-cs="mi"><a href="https://www.robinradar.com" target="_blank" rel="noopener" class="co-tag co-nat">Robin Radar</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.rtx.com" target="_blank" rel="noopener" class="co-tag co-int">Raytheon</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-int">MBDA</a><a href="https://www.fokker.com" target="_blank" rel="noopener" class="co-tag co-itg">Fokker Technologies</a></td>
+          <td data-cs="pr"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.d-fendsolutions.com" target="_blank" rel="noopener" class="co-tag co-int">D-Fend Solutions</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S NL</a><a href="https://www.nedap.com" target="_blank" rel="noopener" class="co-tag co-itg">Nedap</a><a href="https://www.johnsoncontrols.com" target="_blank" rel="noopener" class="co-tag co-itg">Johnson Controls NL</a></td>
+          <td data-cs="go"><a href="https://www.robinradar.com" target="_blank" rel="noopener" class="co-tag co-nat">Robin Radar</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-int">HENSOLDT</a><a href="https://www.nedap.com" target="_blank" rel="noopener" class="co-tag co-itg">Nedap</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens NL</a></td>
+          <td data-cs="en"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB NL</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell NL</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens NL</a></td>
+          <td data-cs="po"><a href="https://www.robinradar.com" target="_blank" rel="noopener" class="co-tag co-nat">Robin Radar</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens NL</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S NL</a></td>
+          <td data-cs="ga"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB NL</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell NL</a></td>
+          <td data-cs="ch"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.boschsecurity.com" target="_blank" rel="noopener" class="co-tag co-itg">Bosch Security</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens NL</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">France</td>
+          <td data-cs="ap"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-nat">Thales</a><a href="https://www.safran-group.com" target="_blank" rel="noopener" class="co-tag co-nat">Safran</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-nat">MBDA</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas FR</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S FR</a><a href="https://www.eiffage-energie-systemes.fr" target="_blank" rel="noopener" class="co-tag co-itg">Eiffage Énergie</a></td>
+          <td data-cs="mi"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-nat">Thales</a><a href="https://www.safran-group.com" target="_blank" rel="noopener" class="co-tag co-nat">Safran</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-nat">MBDA</a><a href="https://www.airbus.com/en/defence" target="_blank" rel="noopener" class="co-tag co-nat">Airbus Defence</a><a href="https://www.dassault-aviation.com" target="_blank" rel="noopener" class="co-tag co-nat">Dassault</a><a href="https://www.soprasteria.com" target="_blank" rel="noopener" class="co-tag co-itg">Sopra Steria</a></td>
+          <td data-cs="pr"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-nat">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.d-fendsolutions.com" target="_blank" rel="noopener" class="co-tag co-int">D-Fend Solutions</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas FR</a><a href="https://www.prosegur.com" target="_blank" rel="noopener" class="co-tag co-itg">Prosegur FR</a></td>
+          <td data-cs="go"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-nat">Thales</a><a href="https://www.safran-group.com" target="_blank" rel="noopener" class="co-tag co-nat">Safran</a><a href="https://www.airbus.com/en/defence" target="_blank" rel="noopener" class="co-tag co-nat">Airbus Defence</a><a href="https://www.soprasteria.com" target="_blank" rel="noopener" class="co-tag co-itg">Sopra Steria</a><a href="https://eviden.com" target="_blank" rel="noopener" class="co-tag co-itg">Atos (Eviden)</a></td>
+          <td data-cs="en"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-nat">Thales</a><a href="https://www.safran-group.com" target="_blank" rel="noopener" class="co-tag co-nat">Safran</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens FR</a><a href="https://www.se.com" target="_blank" rel="noopener" class="co-tag co-itg">Schneider Electric</a><a href="https://www.edf.fr" target="_blank" rel="noopener" class="co-tag co-itg">EDF</a></td>
+          <td data-cs="po"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-nat">Thales</a><a href="https://www.safran-group.com" target="_blank" rel="noopener" class="co-tag co-nat">Safran</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas FR</a><a href="https://www.bollore-logistics.com" target="_blank" rel="noopener" class="co-tag co-itg">Bolloré Logistics</a></td>
+          <td data-cs="ga"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-nat">Thales</a><a href="https://www.safran-group.com" target="_blank" rel="noopener" class="co-tag co-nat">Safran</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.se.com" target="_blank" rel="noopener" class="co-tag co-itg">Schneider Electric</a></td>
+          <td data-cs="ch"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-nat">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.se.com" target="_blank" rel="noopener" class="co-tag co-itg">Schneider Electric</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens FR</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">Germany</td>
+          <td data-cs="ap"><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-nat">HENSOLDT</a><span class="co-tag co-nat">Rohde &amp; Schwarz</span><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-nat">Dedrone (HQ)</a><a href="https://www.diehl.com/defence" target="_blank" rel="noopener" class="co-tag co-nat">Diehl Defence</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas DE</a><a href="https://www.koetter.de" target="_blank" rel="noopener" class="co-tag co-itg">Kötter Security</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens DE</a></td>
+          <td data-cs="mi"><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-nat">HENSOLDT</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-nat">Rheinmetall</a><a href="https://www.diehl.com/defence" target="_blank" rel="noopener" class="co-tag co-nat">Diehl Defence</a><a href="https://www.airbus.com/en/defence" target="_blank" rel="noopener" class="co-tag co-nat">Airbus Defence</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-int">MBDA</a><a href="https://www.wisag.de" target="_blank" rel="noopener" class="co-tag co-itg">WISAG Security</a></td>
+          <td data-cs="pr"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-nat">Dedrone (HQ)</a><a href="https://www.d-fendsolutions.com" target="_blank" rel="noopener" class="co-tag co-int">D-Fend Solutions</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas DE</a><a href="https://www.koetter.de" target="_blank" rel="noopener" class="co-tag co-itg">Kötter Security</a><a href="https://www.johnsoncontrols.com" target="_blank" rel="noopener" class="co-tag co-itg">Johnson Controls DE</a></td>
+          <td data-cs="go"><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-nat">HENSOLDT</a><span class="co-tag co-nat">Rohde &amp; Schwarz</span><a href="https://www.airbus.com/en/defence" target="_blank" rel="noopener" class="co-tag co-nat">Airbus Defence</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens DE</a><a href="https://eviden.com" target="_blank" rel="noopener" class="co-tag co-itg">Atos (Eviden)</a></td>
+          <td data-cs="en"><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-nat">HENSOLDT</a><a href="https://www.diehl.com/defence" target="_blank" rel="noopener" class="co-tag co-nat">Diehl Defence</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens DE</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB DE</a><a href="https://www.se.com" target="_blank" rel="noopener" class="co-tag co-itg">Schneider Electric DE</a></td>
+          <td data-cs="po"><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-nat">HENSOLDT</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-nat">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas DE</a><a href="https://www.boschsecurity.com" target="_blank" rel="noopener" class="co-tag co-itg">Bosch Security</a></td>
+          <td data-cs="ga"><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-nat">HENSOLDT</a><span class="co-tag co-nat">Rohde &amp; Schwarz</span><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens DE</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell DE</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB DE</a></td>
+          <td data-cs="ch"><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-nat">HENSOLDT</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-nat">Dedrone</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.boschsecurity.com" target="_blank" rel="noopener" class="co-tag co-itg">Bosch Security</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens DE</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">Belgium</td>
+          <td data-cs="ap"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-int">HENSOLDT</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas BE</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S BE</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens BE</a></td>
+          <td data-cs="mi"><a href="https://www.fnherstal.com" target="_blank" rel="noopener" class="co-tag co-nat">FN Herstal</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-int">MBDA</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-int">Rheinmetall</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://eviden.com" target="_blank" rel="noopener" class="co-tag co-itg">Atos (Eviden)</a></td>
+          <td data-cs="pr"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.d-fendsolutions.com" target="_blank" rel="noopener" class="co-tag co-int">D-Fend Solutions</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas BE</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S BE</a><a href="https://www.johnsoncontrols.com" target="_blank" rel="noopener" class="co-tag co-itg">Johnson Controls BE</a></td>
+          <td data-cs="go"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-int">HENSOLDT</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas BE</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens BE</a></td>
+          <td data-cs="en"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB BE</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens BE</a><a href="https://www.se.com" target="_blank" rel="noopener" class="co-tag co-itg">Schneider Electric</a></td>
+          <td data-cs="po"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.robinradar.com" target="_blank" rel="noopener" class="co-tag co-int">Robin Radar</a><a href="https://www.portofantwerpbruges.com" target="_blank" rel="noopener" class="co-tag co-itg">Port of Antwerp-Bruges Sec.</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S BE</a></td>
+          <td data-cs="ga"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB BE</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell BE</a></td>
+          <td data-cs="ch"><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens BE</a><a href="https://www.boschsecurity.com" target="_blank" rel="noopener" class="co-tag co-itg">Bosch Security</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">Denmark</td>
+          <td data-cs="ap"><a href="https://www.weibel.dk" target="_blank" rel="noopener" class="co-tag co-nat">Weibel Scientific</a><a href="https://www.mydefence.dk" target="_blank" rel="noopener" class="co-tag co-nat">MyDefence</a><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas DK</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S DK</a></td>
+          <td data-cs="mi"><a href="https://www.weibel.dk" target="_blank" rel="noopener" class="co-tag co-nat">Weibel Scientific</a><a href="https://www.mydefence.dk" target="_blank" rel="noopener" class="co-tag co-nat">MyDefence</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-int">MBDA</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-int">Rheinmetall</a><a href="https://www.terma.com" target="_blank" rel="noopener" class="co-tag co-itg">Terma</a></td>
+          <td data-cs="pr"><a href="https://www.mydefence.dk" target="_blank" rel="noopener" class="co-tag co-nat">MyDefence</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas DK</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S DK</a></td>
+          <td data-cs="go"><a href="https://www.weibel.dk" target="_blank" rel="noopener" class="co-tag co-nat">Weibel Scientific</a><a href="https://www.mydefence.dk" target="_blank" rel="noopener" class="co-tag co-nat">MyDefence</a><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.terma.com" target="_blank" rel="noopener" class="co-tag co-itg">Terma</a></td>
+          <td data-cs="en"><a href="https://www.mydefence.dk" target="_blank" rel="noopener" class="co-tag co-nat">MyDefence</a><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens DK</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB DK</a></td>
+          <td data-cs="po"><a href="https://www.weibel.dk" target="_blank" rel="noopener" class="co-tag co-nat">Weibel Scientific</a><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas DK</a></td>
+          <td data-cs="ga"><a href="https://www.mydefence.dk" target="_blank" rel="noopener" class="co-tag co-nat">MyDefence</a><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB DK</a></td>
+          <td data-cs="ch"><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.saab.com" target="_blank" rel="noopener" class="co-tag co-int">Saab</a><a href="https://www.boschsecurity.com" target="_blank" rel="noopener" class="co-tag co-itg">Bosch Security DK</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">Italy</td>
+          <td data-cs="ap"><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-nat">Leonardo</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas IT</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S IT</a><a href="https://www.prosegur.com" target="_blank" rel="noopener" class="co-tag co-itg">Prosegur IT</a></td>
+          <td data-cs="mi"><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-nat">Leonardo</a><a href="https://www.elt.it" target="_blank" rel="noopener" class="co-tag co-nat">Elettronica</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-int">MBDA</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-int">Rheinmetall</a><a href="https://www.avio.com" target="_blank" rel="noopener" class="co-tag co-itg">Finmeccanica / Avio</a></td>
+          <td data-cs="pr"><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-nat">Leonardo</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.d-fendsolutions.com" target="_blank" rel="noopener" class="co-tag co-int">D-Fend Solutions</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas IT</a><a href="https://www.prosegur.com" target="_blank" rel="noopener" class="co-tag co-itg">Prosegur IT</a></td>
+          <td data-cs="go"><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-nat">Leonardo</a><a href="https://www.elt.it" target="_blank" rel="noopener" class="co-tag co-nat">Elettronica</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens IT</a><a href="https://eviden.com" target="_blank" rel="noopener" class="co-tag co-itg">Atos (Eviden) IT</a></td>
+          <td data-cs="en"><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-nat">Leonardo</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB IT</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens IT</a></td>
+          <td data-cs="po"><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-nat">Leonardo</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas IT</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S IT</a></td>
+          <td data-cs="ga"><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-nat">Leonardo</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB IT</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell IT</a></td>
+          <td data-cs="ch"><a href="https://www.leonardocompany.com" target="_blank" rel="noopener" class="co-tag co-nat">Leonardo</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.boschsecurity.com" target="_blank" rel="noopener" class="co-tag co-itg">Bosch Security IT</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens IT</a></td>
+        </tr>
+
+        <tr>
+          <td class="co-country">United Kingdom</td>
+          <td data-cs="ap"><a href="https://www.blighter.com" target="_blank" rel="noopener" class="co-tag co-nat">Blighter Surveillance</a><a href="https://www.chess-dynamics.com" target="_blank" rel="noopener" class="co-tag co-nat">Chess Dynamics</a><a href="https://www.auds.com" target="_blank" rel="noopener" class="co-tag co-nat">AUDS (Enterprise)</a><a href="https://www.droneshield.com" target="_blank" rel="noopener" class="co-tag co-int">DroneShield</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.mitie.com" target="_blank" rel="noopener" class="co-tag co-itg">Mitie Security</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S UK</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas UK</a></td>
+          <td data-cs="mi"><a href="https://www.baesystems.com" target="_blank" rel="noopener" class="co-tag co-nat">BAE Systems</a><a href="https://www.qinetiq.com" target="_blank" rel="noopener" class="co-tag co-nat">QinetiQ</a><a href="https://www.roke.co.uk" target="_blank" rel="noopener" class="co-tag co-nat">Roke (Chemring)</a><a href="https://www.blighter.com" target="_blank" rel="noopener" class="co-tag co-nat">Blighter Surveillance</a><a href="https://www.mbda-systems.com" target="_blank" rel="noopener" class="co-tag co-int">MBDA</a><a href="https://www.rheinmetall.com" target="_blank" rel="noopener" class="co-tag co-int">Rheinmetall</a><a href="https://www.babcock.co.uk" target="_blank" rel="noopener" class="co-tag co-itg">Babcock International</a></td>
+          <td data-cs="pr"><a href="https://www.dronedefence.co.uk" target="_blank" rel="noopener" class="co-tag co-nat">Drone Defence UK</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.d-fendsolutions.com" target="_blank" rel="noopener" class="co-tag co-int">D-Fend Solutions</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S UK</a><a href="https://www.mitie.com" target="_blank" rel="noopener" class="co-tag co-itg">Mitie Security</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas UK</a></td>
+          <td data-cs="go"><a href="https://www.baesystems.com" target="_blank" rel="noopener" class="co-tag co-nat">BAE Systems</a><a href="https://www.qinetiq.com" target="_blank" rel="noopener" class="co-tag co-nat">QinetiQ</a><a href="https://www.blighter.com" target="_blank" rel="noopener" class="co-tag co-nat">Blighter Surveillance</a><a href="https://www.hensoldt.net" target="_blank" rel="noopener" class="co-tag co-int">HENSOLDT</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas UK</a><a href="https://www.leidos.com" target="_blank" rel="noopener" class="co-tag co-itg">Leidos UK</a></td>
+          <td data-cs="en"><a href="https://www.blighter.com" target="_blank" rel="noopener" class="co-tag co-nat">Blighter Surveillance</a><a href="https://www.qinetiq.com" target="_blank" rel="noopener" class="co-tag co-nat">QinetiQ</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens UK</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell UK</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB UK</a></td>
+          <td data-cs="po"><a href="https://www.blighter.com" target="_blank" rel="noopener" class="co-tag co-nat">Blighter Surveillance</a><a href="https://www.chess-dynamics.com" target="_blank" rel="noopener" class="co-tag co-nat">Chess Dynamics</a><a href="https://www.thalesgroup.com" target="_blank" rel="noopener" class="co-tag co-int">Thales</a><a href="https://www.allieduniversal.com" target="_blank" rel="noopener" class="co-tag co-itg">G4S UK</a><a href="https://www.securitas.com" target="_blank" rel="noopener" class="co-tag co-itg">Securitas UK</a></td>
+          <td data-cs="ga"><a href="https://www.qinetiq.com" target="_blank" rel="noopener" class="co-tag co-nat">QinetiQ</a><a href="https://www.blighter.com" target="_blank" rel="noopener" class="co-tag co-nat">Blighter Surveillance</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.honeywell.com" target="_blank" rel="noopener" class="co-tag co-itg">Honeywell UK</a><a href="https://www.abb.com" target="_blank" rel="noopener" class="co-tag co-itg">ABB UK</a></td>
+          <td data-cs="ch"><a href="https://www.roke.co.uk" target="_blank" rel="noopener" class="co-tag co-nat">Roke (Chemring)</a><a href="https://www.qinetiq.com" target="_blank" rel="noopener" class="co-tag co-nat">QinetiQ</a><a href="https://www.dedrone.com" target="_blank" rel="noopener" class="co-tag co-int">Dedrone</a><a href="https://www.boschsecurity.com" target="_blank" rel="noopener" class="co-tag co-itg">Bosch Security UK</a><a href="https://www.siemens.com" target="_blank" rel="noopener" class="co-tag co-itg">Siemens UK</a></td>
+        </tr>
+
+        </tbody>
+      </table>
     </div>
-    <div class="uc-card reveal">
-      <div class="uc-num">04</div>
-      <div class="uc-title">Stadiums & Major Events</div>
-      <div class="uc-scenario">A stadium final or national summit — high-value target, coordinated drone attack is catastrophic.</div>
-    </div>
-    <div class="uc-card reveal">
-      <div class="uc-num">05</div>
-      <div class="uc-title">Ports & Logistics Hubs</div>
-      <div class="uc-scenario">Drone surveillance of cargo positions represents significant economic and national security risk.</div>
-    </div>
-    <div class="uc-card reveal">
-      <div class="uc-num">06</div>
-      <div class="uc-title">Border Perimeter Surveillance</div>
-      <div class="uc-scenario">A national border requires continuous coverage across hundreds of kilometres. Ground sensors miss aerial intrusions.</div>
-    </div>
-    <div class="uc-card reveal">
-      <div class="uc-num">07</div>
-      <div class="uc-title">Government & Sensitive Facilities</div>
-      <div class="uc-scenario">Embassy compounds and government campuses face persistent drone threat. Existing security is entirely ground-focused.</div>
-    </div>
-    <div class="uc-card reveal">
-      <div class="uc-num">08</div>
-      <div class="uc-title">OEM Integration</div>
-      <div class="uc-scenario">A drone manufacturer wants autonomous detection and intercept capability. Building the AI stack in-house takes years.</div>
-    </div>
-    <div class="uc-card reveal">
-      <div class="uc-num">09</div>
-      <div class="uc-title">Forward Operating Bases</div>
-      <div class="uc-scenario">A forward base in an active zone: GPS unreliable, connectivity intermittent, operators cannot be alert 24/7.</div>
-    </div>
+
+    <p class="mkt-sources" style="margin-top:20px">Company data sourced from: MarketsandMarkets Europe Anti-Drone Market Report 2025–2030; Orbital Today European C-UAS landscape analysis; Securitas AB, G4S (Allied Universal), Prosegur, Johnson Controls, Siemens Building Technologies, Bosch Security Systems, Honeywell Building Technologies, ABB public market filings and country operations data. National company designations reflect HQ country. International companies are listed where confirmed market presence or active contracts exist. Integrators listed are major European security systems integrators with demonstrable critical infrastructure deployment experience.</p>
   </div>
 </section>
 
@@ -807,6 +1136,27 @@ if ('IntersectionObserver' in window) {
 } else {
   revealAll();
 }
+
+// ── Companies table segment filter ──
+function coFilter(seg, btn) {
+  document.querySelectorAll('.co-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#co-tbl th[data-cs], #co-tbl td[data-cs]').forEach(el => {
+    el.style.display = (seg === 'all' || el.dataset.cs === seg) ? '' : 'none';
+  });
+}
+
+// ── Segment scenario accordion ──
+document.querySelectorAll('.seg-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.seg-item');
+    const body = item.querySelector('.seg-body');
+    const inner = item.querySelector('.seg-body-inner');
+    const isOpen = item.classList.contains('open');
+    item.classList.toggle('open', !isOpen);
+    body.style.maxHeight = isOpen ? '0' : inner.scrollHeight + 24 + 'px';
+  });
+});
 
 // ── FAQ accordion ──
 document.querySelectorAll('.faq-q').forEach(btn => {
